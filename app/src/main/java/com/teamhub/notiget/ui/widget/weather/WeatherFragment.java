@@ -26,7 +26,7 @@ public class WeatherFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
-        root = inflater.inflate(R.layout.main_fragment, container, false);
+        root = inflater.inflate(R.layout.widget_weather, container, false);
 
         // TODO: init reference
 

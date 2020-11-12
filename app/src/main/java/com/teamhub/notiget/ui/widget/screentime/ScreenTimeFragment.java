@@ -26,7 +26,7 @@ public class ScreenTimeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(ScreenTimeViewModel.class);
-        root = inflater.inflate(R.layout.main_fragment, container, false);
+        root = inflater.inflate(R.layout.widget_screentime, container, false);
 
         // TODO: init reference
 
