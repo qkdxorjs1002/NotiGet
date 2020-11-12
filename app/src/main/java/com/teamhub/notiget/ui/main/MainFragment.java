@@ -7,17 +7,24 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.teamhub.notiget.R;
+import com.teamhub.notiget.adapter.WidgetListAdapter;
 
 public class MainFragment extends Fragment {
 
     private MainViewModel viewModel;
     private View root;
+
+    private RecyclerView widgetListView;
+    private WidgetListAdapter widgetListAdapter;
+    private LinearLayoutManager widgetListLayoutManager;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -30,7 +37,38 @@ public class MainFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         root = inflater.inflate(R.layout.main_fragment, container, false);
 
+        initReferences();
+        initObservers();
+        initEvents();
+
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        viewModel.commandMakeWidgetList();
+    }
+
+    private void initReferences() {
+        widgetListView = (RecyclerView) root.findViewById(R.id.WidgetListView);
+        widgetListAdapter = new WidgetListAdapter(this);
+        widgetListLayoutManager = new LinearLayoutManager(this.getContext());
+
+        widgetListView.setHasFixedSize(true);
+        widgetListView.setAdapter(widgetListAdapter);
+        widgetListView.setLayoutManager(widgetListLayoutManager);
+    }
+
+    private void initObservers() {
+        viewModel.widgetList.observe(getViewLifecycleOwner(), widgets -> {
+            widgetListAdapter.updateList(widgets);
+        });
+    }
+
+    private void initEvents() {
+
     }
 
 }
