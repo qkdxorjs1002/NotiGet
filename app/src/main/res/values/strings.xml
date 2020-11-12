@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">NotiGet</string>
+    <string name="ui_title_date_placeholder">11월 1일 일요일</string>
+    <string name="ui_title_highlight_placeholder">하이라이트</string>
+    <string name="ui_widget_title_placeholder">위젯 타이틀</string>
+    <string name="ui_widget_weather">날씨</string>
+    <string name="ui_widget_screentime">스크린 타임</string>
+    <string name="ui_widget_memo">메모</string>
+    <string name="ui_widget_findroute">길 찾기</string>
 </resources>
