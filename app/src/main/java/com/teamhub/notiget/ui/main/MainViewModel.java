@@ -1,5 +1,6 @@
 package com.teamhub.notiget.ui.main;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -12,8 +13,11 @@ import com.teamhub.notiget.ui.widget.memo.MemoFragment;
 import com.teamhub.notiget.ui.widget.screentime.ScreenTimeFragment;
 import com.teamhub.notiget.ui.widget.weather.WeatherFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainViewModel extends ViewModel {
 
@@ -34,6 +38,15 @@ public class MainViewModel extends ViewModel {
         widgets.add(new Widget(CalculatorFragment::newInstance, R.string.ui_widget_calculator));
 
         this.widgetList.postValue(widgets);
+    }
+
+    public LiveData<String> currentDate() {
+        MutableLiveData<String> date = new MutableLiveData<>();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM월 d일 E요일", Locale.KOREA);
+        date.setValue(simpleDateFormat.format(new Date(System.currentTimeMillis())));
+
+        return date;
     }
 
 }

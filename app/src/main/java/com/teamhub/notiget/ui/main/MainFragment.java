@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.adapter.WidgetListAdapter;
@@ -21,6 +22,8 @@ public class MainFragment extends Fragment {
 
     private MainViewModel viewModel;
     private View root;
+
+    private TextView titleDate;
 
     private RecyclerView widgetListView;
     private WidgetListAdapter widgetListAdapter;
@@ -52,6 +55,8 @@ public class MainFragment extends Fragment {
     }
 
     private void initReferences() {
+        titleDate = (TextView) root.findViewById(R.id.TitleDate);
+
         widgetListView = (RecyclerView) root.findViewById(R.id.WidgetListView);
         widgetListAdapter = new WidgetListAdapter(this);
         widgetListLayoutManager = new LinearLayoutManager(this.getContext());
@@ -62,6 +67,10 @@ public class MainFragment extends Fragment {
     }
 
     private void initObservers() {
+        viewModel.currentDate().observe(getViewLifecycleOwner(), s -> {
+            titleDate.setText(s);
+        });
+
         viewModel.widgetList.observe(getViewLifecycleOwner(), widgets -> {
             widgetListAdapter.updateList(widgets);
         });
