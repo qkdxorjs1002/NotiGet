@@ -6,5 +6,5 @@
     <string name="ui_widget_weather">날씨</string>
     <string name="ui_widget_screentime">스크린 타임</string>
     <string name="ui_widget_memo">메모</string>
-    <string name="ui_widget_findroute">길 찾기</string>
+    <string name="ui_widget_dday">디데이</string>
 </resources>

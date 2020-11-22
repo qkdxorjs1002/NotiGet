@@ -1,4 +1,4 @@
-package com.teamhub.notiget.ui.widget.findroute;
+package com.teamhub.notiget.ui.widget.dday;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,21 +12,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.teamhub.notiget.R;
 
-public class FindRouteFragment extends Fragment {
+public class DDayFragment extends Fragment {
 
-    private FindRouteViewModel viewModel;
+    private DDayViewModel viewModel;
     private View root;
 
-    public static FindRouteFragment newInstance() {
-        return new FindRouteFragment();
+    public static DDayFragment newInstance() {
+        return new DDayFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(FindRouteViewModel.class);
-        root = inflater.inflate(R.layout.widget_findroute, container, false);
+        viewModel = new ViewModelProvider(this).get(DDayViewModel.class);
+        root = inflater.inflate(R.layout.widget_dday, container, false);
 
         // TODO: init reference
 

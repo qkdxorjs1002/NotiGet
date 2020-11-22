@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.widget.findroute.FindRouteFragment">
+    tools:context=".ui.widget.dday.DDayFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="@string/ui_widget_findroute"
+        android:text="@string/ui_widget_dday"
         android:background="@color/purple_200"
         app:layout_constraintTop_toTopOf="parent"/>
 
