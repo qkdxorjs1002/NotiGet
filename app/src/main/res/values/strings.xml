@@ -7,4 +7,6 @@
     <string name="ui_widget_screentime">스크린 타임</string>
     <string name="ui_widget_memo">메모</string>
     <string name="ui_widget_dday">디데이</string>
+    <string name="ui_widget_contact">주소록</string>
+    <string name="ui_widget_calculator">계산기</string>
 </resources>

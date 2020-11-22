@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fading_edge_length">24dp</dimen>
+    <dimen name="widget_corner_radius">12dp</dimen>
+    <dimen name="widget_gap">12dp</dimen>
+    <dimen name="widget_horizontal_gap">12dp</dimen>
+    <dimen name="widget_vertical_gap">6dp</dimen>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ListFadingEdge">
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">@dimen/fading_edge_length</item>
+        <item name="android:fillViewport">false</item>
+        <item name="android:requiresFadingEdge">vertical</item>
+    </style>
+</resources>
