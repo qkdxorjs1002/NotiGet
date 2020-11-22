@@ -1,6 +1,4 @@
-package com.teamhub.notiget.model;
-
-import android.view.View;
+package com.teamhub.notiget.model.main;
 
 import androidx.fragment.app.Fragment;
 

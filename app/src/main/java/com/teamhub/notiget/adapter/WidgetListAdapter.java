@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teamhub.notiget.R;
-import com.teamhub.notiget.model.Widget;
+import com.teamhub.notiget.model.main.Widget;
 
 import java.util.List;
 
@@ -70,7 +70,7 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
         layout.addView(fragmentContainer);
 
         parentFragment.getChildFragmentManager().beginTransaction()
-                .add(fragmentContainer.getId(), widget.getFragment())
+                .replace(fragmentContainer.getId(), widget.getFragment())
                 .commitNow();
     }
 

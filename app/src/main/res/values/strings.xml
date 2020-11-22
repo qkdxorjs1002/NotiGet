@@ -9,4 +9,5 @@
     <string name="ui_widget_dday">디데이</string>
     <string name="ui_widget_contact">주소록</string>
     <string name="ui_widget_calculator">계산기</string>
+    <string name="ui_widget_weather_temp_placeholder">20°C</string>
 </resources>

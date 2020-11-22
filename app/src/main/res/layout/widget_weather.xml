@@ -7,10 +7,57 @@
     android:layout_height="wrap_content"
     tools:context=".ui.widget.weather.WeatherFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="@string/ui_widget_weather"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/WeatherCurrentContainer"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:id="@+id/WeatherCurrentIcon"
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="false"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/WeatherCurrentTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingEnd="12dp"
+            android:gravity="center_vertical"
+            android:text="@string/ui_widget_weather_temp_placeholder"
+            android:textAppearance="@style/Font.Weather.Temp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/WeatherCurrentIcon"/>
+
+        <TextView
+            android:id="@+id/WeatherCurrentState"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="bottom"
+            android:text="Clear"
+            android:textAppearance="@style/Font.Weather.State"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/WeatherCurrentTemp"
+            app:layout_constraintBottom_toTopOf="@id/WeatherCurrentDescription"/>
+
+        <TextView
+            android:id="@+id/WeatherCurrentDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="top"
+            android:text="clear sky"
+            android:textAppearance="@style/Font.Weather.Description"
+            app:layout_constraintTop_toBottomOf="@id/WeatherCurrentState"
+            app:layout_constraintLeft_toRightOf="@id/WeatherCurrentTemp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

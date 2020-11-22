@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/widget_gap"
             android:gravity="center"
-            android:textAppearance="@style/Font.ExtendTitle"
+            android:textAppearance="@style/Font.Main.Date"
             android:text="@string/ui_title_date_placeholder"
             app:layout_constraintTop_toTopOf="@id/TitleContainer"/>
 
@@ -59,6 +59,7 @@
         android:id="@+id/WidgetListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        tools:itemCount="10"
         app:layout_constraintTop_toBottomOf="@id/TitleContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/layout_widget_list_item"/>

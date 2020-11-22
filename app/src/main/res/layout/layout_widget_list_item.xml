@@ -30,7 +30,7 @@
                 android:paddingBottom="@dimen/widget_vertical_gap"
                 android:background="@color/widget_title_background_color"
                 android:text="@string/ui_widget_title_placeholder"
-                android:textAppearance="@style/Font.SubList"
+                android:textAppearance="@style/Font.Widget.Title"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout

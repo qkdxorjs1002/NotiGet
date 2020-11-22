@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.teamhub.notiget.R;
-import com.teamhub.notiget.model.Widget;
+import com.teamhub.notiget.model.main.Widget;
 import com.teamhub.notiget.ui.widget.calculator.CalculatorFragment;
 import com.teamhub.notiget.ui.widget.contact.ContactFragment;
 import com.teamhub.notiget.ui.widget.dday.DDayFragment;

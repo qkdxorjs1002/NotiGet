@@ -44,4 +44,31 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">13sp</item>
     </style>
+
+    <style name="Font.Main.Date" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_light_hestia</item>
+    </style>
+
+    <style name="Font.Widget.Title" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_light_hestia</item>
+    </style>
+
+    <style name="Font.Weather.Temp" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="Font.Weather.State" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Font.Weather.Description" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>
