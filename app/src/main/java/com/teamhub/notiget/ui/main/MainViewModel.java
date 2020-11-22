@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.model.Widget;
+import com.teamhub.notiget.ui.widget.calculator.CalculatorFragment;
+import com.teamhub.notiget.ui.widget.contact.ContactFragment;
 import com.teamhub.notiget.ui.widget.dday.DDayFragment;
 import com.teamhub.notiget.ui.widget.memo.MemoFragment;
 import com.teamhub.notiget.ui.widget.screentime.ScreenTimeFragment;
@@ -28,6 +30,8 @@ public class MainViewModel extends ViewModel {
         widgets.add(new Widget(ScreenTimeFragment::newInstance, R.string.ui_widget_screentime));
         widgets.add(new Widget(MemoFragment::newInstance, R.string.ui_widget_memo));
         widgets.add(new Widget(DDayFragment::newInstance, R.string.ui_widget_dday));
+        widgets.add(new Widget(ContactFragment::newInstance, R.string.ui_widget_contact));
+        widgets.add(new Widget(CalculatorFragment::newInstance, R.string.ui_widget_calculator));
 
         this.widgetList.postValue(widgets);
     }
