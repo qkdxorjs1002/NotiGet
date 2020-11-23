@@ -1,8 +1,8 @@
-package com.teamhub.notiget.repository.weather;
+package com.teamhub.notiget.repository.weather.openweather;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.teamhub.notiget.model.weather.OneCallModel;
+import com.teamhub.notiget.model.weather.openweather.OneCallModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +27,7 @@ public class WeatherRepository {
         MutableLiveData<OneCallModel> weatherData = new MutableLiveData<>();
 
         Call<OneCallModel> weatherCall = service.getWeather(lat, lon, "kr",
-                "hourly,minutely,alerts", "87008e1379858d1033dc7b454669ff96");
+                "minutely,alerts", "87008e1379858d1033dc7b454669ff96");
 
         weatherCall.enqueue(new Callback<OneCallModel>() {
             @Override

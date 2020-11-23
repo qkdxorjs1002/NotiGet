@@ -1,5 +1,6 @@
 package com.teamhub.notiget.ui.widget.weather;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,17 +15,25 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.teamhub.notiget.R;
+import com.teamhub.notiget.adapter.XAxisLabelFormatter;
 
 public class WeatherFragment extends Fragment {
 
     private WeatherViewModel viewModel;
     private View root;
 
-    private ImageView weatherCurrentIcon;
-    private TextView weatherCurrentTemp;
-    private TextView weatherCurrentState;
-    private TextView weatherCurrentDescription;
+    private ImageView weatherNowIcon;
+    private TextView weatherNowTemp;
+    private TextView weatherNowFeelsLike;
+    private TextView weatherNowState;
+    private TextView weatherNowHumidity;
+    private TextView weatherNowDust;
+    private TextView weatherNowPM10;
+    private TextView weatherNowPM2_5;
+    private LineChart weatherHourlyTempGraph;
 
     public static WeatherFragment newInstance() {
         return new WeatherFragment();
@@ -37,6 +46,8 @@ public class WeatherFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
         root = inflater.inflate(R.layout.widget_weather, container, false);
 
+        viewModel.getWeather(37.476543, 127.048116);
+
         initReferences();
         initObservers();
         initEvents();
@@ -44,18 +55,16 @@ public class WeatherFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
     private void initReferences() {
-        weatherCurrentIcon = (ImageView) root.findViewById(R.id.WeatherCurrentIcon);
-        weatherCurrentTemp = (TextView) root.findViewById(R.id.WeatherCurrentTemp);
-        weatherCurrentState = (TextView) root.findViewById(R.id.WeatherCurrentState);
-        weatherCurrentDescription = (TextView) root.findViewById(R.id.WeatherCurrentDescription);
-        viewModel.getWeather(37.476543, 127.048116);
+        weatherNowIcon = (ImageView) root.findViewById(R.id.WeatherNowIcon);
+        weatherNowTemp = (TextView) root.findViewById(R.id.WeatherNowTemp);
+        weatherNowFeelsLike = (TextView) root.findViewById(R.id.WeatherNowFeelsLike);
+        weatherNowHumidity = (TextView) root.findViewById(R.id.WeatherNowHumidity);
+        weatherNowState = (TextView) root.findViewById(R.id.WeatherNowState);
+        weatherNowDust = (TextView) root.findViewById(R.id.WeatherNowDust);
+        weatherNowPM10 = (TextView) root.findViewById(R.id.WeatherNowPM10);
+        weatherNowPM2_5 = (TextView) root.findViewById(R.id.WeatherNowPM2_5);
+        weatherHourlyTempGraph = (LineChart) root.findViewById(R.id.WeatherHourlyTempGraph);
     }
 
     private void initObservers() {
@@ -65,11 +74,42 @@ public class WeatherFragment extends Fragment {
                             .concat(oneCallModel.current.weather.get(0).icon)
                             .concat("@4x.png"))
                     .override(Target.SIZE_ORIGINAL)
-                    .into(weatherCurrentIcon);
+                    .into(weatherNowIcon);
 
-            weatherCurrentTemp.setText(String.valueOf(Math.round(273.15 - oneCallModel.current.temp)).concat("°C"));
-            weatherCurrentState.setText(oneCallModel.current.weather.get(0).description);
-            weatherCurrentDescription.setText("체감 ".concat(String.valueOf(Math.round(273.15 - oneCallModel.current.feels_like)).concat("°C")));
+            weatherNowTemp.setText(viewModel.kelvinToCelsius(oneCallModel.current.temp));
+            weatherNowFeelsLike.setText("체감 "
+                    .concat(viewModel.kelvinToCelsius(oneCallModel.current.feels_like)));
+            weatherNowHumidity.setText("습도 "
+                    .concat(String.valueOf(oneCallModel.current.humidity).concat("%")));
+
+            String city = oneCallModel.timezone.split("/")[1];
+
+            viewModel.makeHourlyChart(oneCallModel.hourly)
+                    .observe(getViewLifecycleOwner(), lineData -> {
+                        weatherHourlyTempGraph.setTouchEnabled(false);
+                        weatherHourlyTempGraph.setDragEnabled(false);
+                        weatherHourlyTempGraph.setScaleEnabled(false);
+                        weatherHourlyTempGraph.setPinchZoom(false);
+                        weatherHourlyTempGraph.setDrawGridBackground(false);
+                        weatherHourlyTempGraph.setMaxHighlightDistance(300);
+                        weatherHourlyTempGraph.getXAxis().setLabelCount(7);
+                        weatherHourlyTempGraph.getXAxis().setAxisLineColor(Color.BLACK);
+                        weatherHourlyTempGraph.getXAxis().setValueFormatter(new XAxisLabelFormatter());
+                        weatherHourlyTempGraph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                        weatherHourlyTempGraph.getAxisLeft().setEnabled(false);
+                        weatherHourlyTempGraph.getAxisRight().setEnabled(false);
+                        weatherHourlyTempGraph.getDescription().setText(city);
+                        weatherHourlyTempGraph.setData(lineData);
+                        weatherHourlyTempGraph.invalidate();
+            });
+
+            viewModel.getDust(city).observe(getViewLifecycleOwner(), dustModels -> {
+                viewModel.gradeToText(dustModels.item_all.pm10Grade.value).observe(getViewLifecycleOwner(), s -> {
+                    weatherNowDust.setText(s);
+                });
+                weatherNowPM10.setText(dustModels.item_all.pm10Value.value);
+                weatherNowPM2_5.setText(dustModels.item_all.pm25Value.value);
+            });
         });
     }
 

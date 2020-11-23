@@ -1,4 +1,4 @@
-package com.teamhub.notiget.model.weather;
+package com.teamhub.notiget.model.weather.openweather;
 
 public class FeelsLikeModel {
 

@@ -1,6 +1,4 @@
-package com.teamhub.notiget.model.weather;
-
-import com.google.gson.annotations.SerializedName;
+package com.teamhub.notiget.model.weather.openweather;
 
 import java.util.List;
 
@@ -8,6 +6,7 @@ public class OneCallModel {
 
     public CurrentModel current;
     public List<DailyModel> daily;
+    public List<HourlyModel> hourly;
     public double lat;
     public double lon;
     public String timezone;

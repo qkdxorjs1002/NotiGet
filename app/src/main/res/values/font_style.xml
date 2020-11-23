@@ -59,16 +59,37 @@
 
     <style name="Font.Weather.Temp" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">28sp</item>
     </style>
 
     <style name="Font.Weather.State" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="Font.Weather.Description" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="Font.Weather.Dust" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Font.Weather.Help" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Font.Weather.Factor" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">8sp</item>
+    </style>
+
+    <style name="Font.Weather.PM" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
 </resources>

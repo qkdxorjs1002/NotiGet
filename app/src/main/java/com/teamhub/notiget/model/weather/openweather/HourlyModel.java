@@ -1,20 +1,18 @@
-package com.teamhub.notiget.model.weather;
+package com.teamhub.notiget.model.weather.openweather;
 
 import java.util.List;
 
-public class DailyModel {
+public class HourlyModel {
 
     public int clouds;
     public double dew_point;
     public long dt;
-    public FeelsLikeModel feels_like;
+    public double feels_like;
     public int humidity;
     public int pop;
     public int pressure;
-    public long sunrise;
-    public long sunset;
-    public TempModel temp;
-    public double uvi;
+    public double temp;
+    public int visibility;
     public List<StatusModel> weather;
     public int wind_deg;
     public double wind_speed;

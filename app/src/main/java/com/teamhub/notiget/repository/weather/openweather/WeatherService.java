@@ -1,6 +1,6 @@
-package com.teamhub.notiget.repository.weather;
+package com.teamhub.notiget.repository.weather.openweather;
 
-import com.teamhub.notiget.model.weather.OneCallModel;
+import com.teamhub.notiget.model.weather.openweather.OneCallModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -9,7 +9,6 @@ import retrofit2.http.Query;
 
 public interface WeatherService {
 
-    @Headers({"Content-Type: charset=UTF-8"})
     @GET("onecall")
     Call<OneCallModel> getWeather(@Query("lat") double lat,
                                   @Query("lon") double lon,
