@@ -1,4 +1,4 @@
-package com.teamhub.notiget.ui.widget.memo;
+package com.teamhub.notiget.ui.widget.digitime;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,21 +12,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.teamhub.notiget.R;
 
-public class MemoFragment extends Fragment {
+public class DigitimeFragment extends Fragment {
 
-    private MemoViewModel viewModel;
+    private DigitimeViewModel viewModel;
     private View root;
 
-    public static MemoFragment newInstance() {
-        return new MemoFragment();
+    public static DigitimeFragment newInstance() {
+        return new DigitimeFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(MemoViewModel.class);
-        root = inflater.inflate(R.layout.widget_memo, container, false);
+        viewModel = new ViewModelProvider(this).get(DigitimeViewModel.class);
+        root = inflater.inflate(R.layout.widget_digitime, container, false);
 
         // TODO: init reference
 

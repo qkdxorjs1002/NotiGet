@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.widget.memo.MemoFragment">
+    tools:context=".ui.widget.digitime.DigitimeFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="@string/ui_widget_memo"
+        android:text="@string/ui_widget_digitime"
         app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
