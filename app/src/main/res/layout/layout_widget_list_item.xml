@@ -20,18 +20,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/WidgetTitle"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/WidgetTitleContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/widget_vertical_gap"
-                android:paddingStart="@dimen/widget_horizontal_gap"
-                android:paddingEnd="@dimen/widget_horizontal_gap"
-                android:paddingBottom="@dimen/widget_vertical_gap"
                 android:background="@color/widget_title_background_color"
-                android:text="@string/ui_widget_title_placeholder"
-                android:textAppearance="@style/Font.Widget.Title"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/WidgetTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="@dimen/widget_vertical_gap"
+                    android:paddingHorizontal="@dimen/widget_horizontal_gap"
+                    android:text="@string/ui_widget_title_placeholder"
+                    android:textAppearance="@style/Font.Widget.Title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/WidgetSettingButton"/>
+
+                <ImageButton
+                    android:id="@+id/WidgetSettingButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    android:paddingHorizontal="@dimen/widget_horizontal_gap"
+                    android:src="@drawable/ic_settings"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/WidgetTitle"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/WidgetFragmentContainer"
@@ -42,7 +63,7 @@
                 android:paddingStart="@dimen/widget_horizontal_gap"
                 android:paddingEnd="@dimen/widget_horizontal_gap"
                 android:paddingBottom="@dimen/widget_vertical_gap"
-                app:layout_constraintTop_toBottomOf="@id/WidgetTitle"/>
+                app:layout_constraintTop_toBottomOf="@id/WidgetTitleContainer"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

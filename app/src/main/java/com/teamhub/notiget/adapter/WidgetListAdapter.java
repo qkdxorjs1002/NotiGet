@@ -3,6 +3,7 @@ package com.teamhub.notiget.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.model.main.Widget;
+import com.teamhub.notiget.ui.widget.base.BaseFragment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
 
     private List<Widget> widgetList;
 
-    private Map<String, Fragment> fragmentList;
+    private Map<String, BaseFragment> fragmentList;
 
     private final Fragment parentFragment;
     private OnItemClickListener onItemClickListener;
@@ -46,9 +47,19 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TextView widgetTitle = (TextView) holder.view.findViewById(R.id.WidgetTitle);
+        ImageButton widgetSettingButton = (ImageButton) holder.view.findViewById(R.id.WidgetSettingButton);
+
         Widget widget = widgetList.get(position);
 
         widgetTitle.setText(widget.getTitleResourceId());
+
+        if (widget.onSettingClickListener != null) {
+            widgetSettingButton.setOnClickListener(v -> {
+                widget.onSettingClickListener.onSettingClick(parentFragment.getContext());
+            });
+
+            widgetSettingButton.setVisibility(View.VISIBLE);
+        }
 
         holder.view.setOnClickListener(v -> {
             if (onItemClickListener != null) {
@@ -76,7 +87,7 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
 
             layout.addView(fragmentContainer);
 
-            Fragment fragment = widget.getFragment();
+            BaseFragment fragment = widget.getFragment();
 
             parentFragment.getChildFragmentManager().beginTransaction()
                     .replace(fragmentContainer.getId(), fragment)

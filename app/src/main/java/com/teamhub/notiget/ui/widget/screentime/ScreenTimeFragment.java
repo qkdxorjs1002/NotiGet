@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.SettingScreenTimeActivity;
 import com.teamhub.notiget.adapter.ApplicationListAdapter;
+import com.teamhub.notiget.model.main.Widget;
 import com.teamhub.notiget.model.screentime.ItemApplication;
 import com.teamhub.notiget.ui.widget.base.BaseFragment;
 
@@ -52,21 +53,17 @@ public class ScreenTimeFragment extends BaseFragment {
         return new ScreenTimeFragment();
     }
 
+    public static final Widget.OnSettingClickListener settingClickListener = context -> {
+        context.startActivity(new Intent(context, SettingScreenTimeActivity.class));
+    };
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(ScreenTimeViewModel.class);
         root = inflater.inflate(R.layout.widget_screentime, container, false);
-        listView = root.findViewById(R.id.lv_screentime);
 
-        root.findViewById(R.id.btn_add).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //add버튼 눌렀을 때 SettingScreenTimeActivity실행
-                startActivity(new Intent(getContext(), SettingScreenTimeActivity.class));
-            }
-        });
 
         ArrayList<ItemApplication> items = new ArrayList<>();//스크린 타임 표시를 위한 요소들 저장
         checkForPermission();//앱별 사용 시간 가져오기 위한 권한 체크
