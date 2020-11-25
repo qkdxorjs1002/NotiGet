@@ -9,7 +9,7 @@ public class DailyModel {
     public long dt;
     public FeelsLikeModel feels_like;
     public int humidity;
-    public int pop;
+    public double pop;
     public int pressure;
     public long sunrise;
     public long sunset;
