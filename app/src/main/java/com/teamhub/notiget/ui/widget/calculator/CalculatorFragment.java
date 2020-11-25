@@ -27,7 +27,7 @@ public class CalculatorFragment extends Fragment {
     private boolean isoperator = false ,Firstinput = true;
     double resultnum = 0, inputnum = 0;
     String operator = "＝", lastoperator = "＋";
-    private Button btn_left_pns, btn_right_pns, btn_percent, btn_clear, btn_number_7,
+    private Button btn_back_space, btn_percent, btn_clear, btn_number_7,
             btn_number_8, btn_number_9, btn_division, btn_number_4, btn_number_5,
             btn_number_6,
             btn_multiplication, btn_number_1, btn_number_2, btn_number_3, btn_plus,
@@ -64,10 +64,8 @@ public class CalculatorFragment extends Fragment {
         btn_number_7 = (Button) root.findViewById(R.id.btn_number_7);
         btn_number_8 = (Button) root.findViewById(R.id.btn_number_8);
         btn_number_9 = (Button) root.findViewById(R.id.btn_number_9);
-        btn_left_pns = (Button) root.findViewById(R.id.btn_left_pns);
-        btn_right_pns = (Button) root.findViewById(R.id.btn_right_pns);
+        btn_back_space = (Button) root.findViewById(R.id.btn_back_space);
         btn_clear = (Button) root.findViewById(R.id.btn_clear);
-        btn_percent = (Button) root.findViewById(R.id.btn_percent);
         btn_multiplication = (Button) root.findViewById(R.id.btn_multiplication);
         btn_plus = (Button) root.findViewById(R.id.btn_plus);
         btn_division = (Button) root.findViewById(R.id.btn_division);
@@ -88,10 +86,8 @@ public class CalculatorFragment extends Fragment {
         btn_number_7.setOnClickListener(clickListener);
         btn_number_8.setOnClickListener(clickListener);
         btn_number_9.setOnClickListener(clickListener);
-        btn_left_pns.setOnClickListener(clickListener);
-        btn_right_pns.setOnClickListener(clickListener);
         btn_clear.setOnClickListener(clearClick);
-        btn_percent.setOnClickListener(clickListener);
+        btn_back_space.setOnClickListener(backspaceClick);
         btn_multiplication.setOnClickListener(operatorClick);
         btn_plus.setOnClickListener(operatorClick);
         btn_division.setOnClickListener(operatorClick);
@@ -108,6 +104,7 @@ public class CalculatorFragment extends Fragment {
                 Firstinput = false;
                 if(operator.equals("＝")){
                     math_text.setText("");
+                    isoperator = false;
                 }
             } else {
                 if (result_text.getText().toString().equals("0")) {
@@ -166,7 +163,6 @@ public class CalculatorFragment extends Fragment {
     };
 
     View.OnClickListener equlaClick = new View.OnClickListener() {
-        @SuppressLint("SetTextI18n")
         @Override
         public void onClick(View view) {
             if(Firstinput){
@@ -194,6 +190,22 @@ public class CalculatorFragment extends Fragment {
             resultnum = 0;
             operator = "＝";
             Firstinput = true;
+            isoperator = false;
+        }
+    };
+    View.OnClickListener backspaceClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(!Firstinput){
+                String get_result_text = result_text.getText().toString();
+                if(get_result_text.length() > 1) {
+                    String subString = get_result_text.substring(0, get_result_text.length() - 1);
+                    result_text.setText(subString);
+                }else {
+                    result_text.setText("0");
+                    Firstinput = true;
+                }
+            }
         }
     };
 
