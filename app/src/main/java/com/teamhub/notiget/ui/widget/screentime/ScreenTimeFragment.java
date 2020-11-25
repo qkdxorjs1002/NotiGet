@@ -15,6 +15,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -41,14 +42,15 @@ public class ScreenTimeFragment extends BaseFragment {
     private ScreenTimeViewModel viewModel;
     private View root;
     private ListView listView;
+    private ImageButton settingButton;
 
-    public static ScreenTimeFragment newInstance() {
-        return new ScreenTimeFragment();
+    public static ScreenTimeFragment newInstance(View v) {
+        return new ScreenTimeFragment(v);
     }
 
-    public static final Widget.OnSettingClickListener settingClickListener = context -> {
-        context.startActivity(new Intent(context, SettingScreenTimeActivity.class));
-    };
+    public ScreenTimeFragment(View v) {
+        super(v);
+    }
 
     @Nullable
     @Override
@@ -56,6 +58,14 @@ public class ScreenTimeFragment extends BaseFragment {
                              @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(ScreenTimeViewModel.class);
         root = inflater.inflate(R.layout.widget_screentime, container, false);
+
+        settingButton = (ImageButton) parentView.findViewById(R.id.WidgetSettingButton);
+
+        settingButton.setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), SettingScreenTimeActivity.class));
+        });
+
+        settingButton.setVisibility(View.VISIBLE);
 
         return root;
     }

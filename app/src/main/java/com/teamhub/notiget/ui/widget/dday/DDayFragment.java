@@ -2,6 +2,7 @@ package com.teamhub.notiget.ui.widget.dday;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,9 +25,16 @@ public class DDayFragment extends BaseFragment {
 
     private View root;
     private TextView dateTv;
+    private ImageButton settingButton;
 
-    public static DDayFragment newInstance() {
-        return new DDayFragment();
+    private DatePickerDialog dialog;
+
+    public static DDayFragment newInstance(View v) {
+        return new DDayFragment(v);
+    }
+
+    public DDayFragment(View v) {
+        super(v);
     }
 
     @Nullable
@@ -35,22 +44,27 @@ public class DDayFragment extends BaseFragment {
         root = inflater.inflate(R.layout.widget_dday, container, false);
 
         dateTv = root.findViewById(R.id.the_day);
-        Button btn = root.findViewById(R.id.date_set_btn);
+        settingButton = (ImageButton) parentView.findViewById(R.id.WidgetSettingButton);
 
         if (load() != 0)
             dateTv.setText((countdday(load()) + "일"));
         else
             dateTv.setText("");
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog dialog = new DatePickerDialog(getContext(), listener, 2020, 11, 22);
-                dialog.show();
-            }
+        dialog = new DatePickerDialog(getContext(), listener, 2020, 11, 22);
+
+        settingButton.setOnClickListener(v -> {
+            dialog.show();
         });
 
+        settingButton.setVisibility(View.VISIBLE);
+
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
@@ -89,4 +103,5 @@ public class DDayFragment extends BaseFragment {
         editor.putLong("dday", dday);
         editor.commit();
     }
+
 }

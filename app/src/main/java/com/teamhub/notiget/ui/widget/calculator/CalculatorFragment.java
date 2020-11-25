@@ -31,9 +31,12 @@ public class CalculatorFragment extends BaseFragment {
             btn_multiplication, btn_number_1, btn_number_2, btn_number_3, btn_plus,
             btn_number_0, btn_point, btn_equal, btn_minus;
 
+    public static CalculatorFragment newInstance(View v) {
+        return new CalculatorFragment(v);
+    }
 
-    public static CalculatorFragment newInstance() {
-        return new CalculatorFragment();
+    public CalculatorFragment(View v) {
+        super(v);
     }
 
     @Nullable

@@ -1,5 +1,6 @@
 package com.teamhub.notiget.adapter.main;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,14 +54,6 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
 
         widgetTitle.setText(widget.getTitleResourceId());
 
-        if (widget.onSettingClickListener != null) {
-            widgetSettingButton.setOnClickListener(v -> {
-                widget.onSettingClickListener.onSettingClick(parentFragment.getContext());
-            });
-
-            widgetSettingButton.setVisibility(View.VISIBLE);
-        }
-
         holder.view.setOnClickListener(v -> {
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(v);
@@ -87,9 +80,10 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
 
             layout.addView(fragmentContainer);
 
-            BaseFragment fragment = widget.getFragment();
+            BaseFragment fragment = widget.getFragment(holder.view);
 
-            parentFragment.getChildFragmentManager().beginTransaction()
+            parentFragment.getChildFragmentManager()
+                    .beginTransaction()
                     .replace(fragmentContainer.getId(), fragment)
                     .commitNow();
 

@@ -1,12 +1,19 @@
 package com.teamhub.notiget.ui.widget.base;
 
+import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.teamhub.notiget.model.main.Widget;
-
 public class BaseFragment extends Fragment {
 
-    public static final Widget.OnSettingClickListener settingClickListener = null;
+    protected final View parentView;
+
+    public static BaseFragment newInstance(View v) {
+        return new BaseFragment(v);
+    }
+
+    public BaseFragment(View v) {
+        parentView = v;
+    }
 
 }

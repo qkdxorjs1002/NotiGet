@@ -1,6 +1,6 @@
 package com.teamhub.notiget.model.main;
 
-import android.content.Context;
+import android.view.View;
 
 import com.teamhub.notiget.ui.widget.base.BaseFragment;
 
@@ -8,24 +8,18 @@ public class Widget {
 
     private final CreateNewInstance createNewInstance;
     private final int titleResourceId;
-    public OnSettingClickListener onSettingClickListener;
 
-    public Widget(CreateNewInstance method, int resourceId, OnSettingClickListener onClickListener) {
+    public Widget(CreateNewInstance method, int resourceId) {
         this.createNewInstance = method;
         this.titleResourceId = resourceId;
-        this.onSettingClickListener = onClickListener;
     }
 
     public interface CreateNewInstance {
-        BaseFragment create();
+        BaseFragment create(View v);
     }
 
-    public interface OnSettingClickListener {
-        void onSettingClick(Context context);
-    }
-
-    public BaseFragment getFragment() {
-        return createNewInstance.create();
+    public BaseFragment getFragment(View v) {
+        return createNewInstance.create(v);
     }
 
     public int getTitleResourceId() {

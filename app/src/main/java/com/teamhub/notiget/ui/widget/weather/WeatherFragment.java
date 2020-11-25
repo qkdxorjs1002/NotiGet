@@ -34,8 +34,12 @@ public class WeatherFragment extends BaseFragment {
     private TextView weatherNowPM2_5;
     private LineChart weatherHourlyTempGraph;
 
-    public static WeatherFragment newInstance() {
-        return new WeatherFragment();
+    public static WeatherFragment newInstance(View v) {
+        return new WeatherFragment(v);
+    }
+
+    public WeatherFragment(View v) {
+        super(v);
     }
 
     @Nullable

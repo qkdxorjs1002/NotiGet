@@ -1,15 +1,14 @@
 package com.teamhub.notiget.ui.main;
 
-import android.content.Context;
-import android.content.Intent;
+import android.view.View;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.teamhub.notiget.R;
-import com.teamhub.notiget.SettingScreenTimeActivity;
 import com.teamhub.notiget.model.main.Widget;
+import com.teamhub.notiget.ui.widget.base.BaseFragment;
 import com.teamhub.notiget.ui.widget.calculator.CalculatorFragment;
 import com.teamhub.notiget.ui.widget.dday.DDayFragment;
 import com.teamhub.notiget.ui.widget.digitime.DigitimeFragment;
@@ -34,24 +33,23 @@ public class MainViewModel extends ViewModel {
         List<Widget> widgets = new ArrayList<>();
 
         widgets.add(new Widget(
-                WeatherFragment::newInstance, R.string.ui_widget_weather,
-                WeatherFragment.settingClickListener)
+                WeatherFragment::newInstance,
+                R.string.ui_widget_weather)
         );
         widgets.add(new Widget(
-                ScreenTimeFragment::newInstance, R.string.ui_widget_screentime,
-                ScreenTimeFragment.settingClickListener)
+                ScreenTimeFragment::newInstance,
+                R.string.ui_widget_screentime)
         );
         widgets.add(new Widget(
-                DigitimeFragment::newInstance, R.string.ui_widget_digitime,
-                DigitimeFragment.settingClickListener)
+                DigitimeFragment::newInstance,
+                R.string.ui_widget_digitime)
+        );
+        widgets.add(new Widget(DDayFragment::newInstance,
+                        R.string.ui_widget_dday)
         );
         widgets.add(new Widget(
-                DDayFragment::newInstance, R.string.ui_widget_dday,
-                DDayFragment.settingClickListener)
-        );
-        widgets.add(new Widget(
-                CalculatorFragment::newInstance, R.string.ui_widget_calculator,
-                CalculatorFragment.settingClickListener)
+                CalculatorFragment::newInstance,
+                R.string.ui_widget_calculator)
         );
 
         this.widgetList.postValue(widgets);
