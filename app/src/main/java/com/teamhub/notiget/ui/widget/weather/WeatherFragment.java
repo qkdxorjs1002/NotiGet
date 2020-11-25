@@ -28,7 +28,6 @@ public class WeatherFragment extends Fragment {
     private ImageView weatherNowIcon;
     private TextView weatherNowTemp;
     private TextView weatherNowFeelsLike;
-    private TextView weatherNowState;
     private TextView weatherNowHumidity;
     private TextView weatherNowDust;
     private TextView weatherNowPM10;
@@ -46,11 +45,11 @@ public class WeatherFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
         root = inflater.inflate(R.layout.widget_weather, container, false);
 
-        viewModel.getWeather(37.476543, 127.048116);
-
         initReferences();
         initObservers();
         initEvents();
+
+        viewModel.getWeather(37.476543, 127.048116);
 
         return root;
     }
@@ -60,7 +59,6 @@ public class WeatherFragment extends Fragment {
         weatherNowTemp = (TextView) root.findViewById(R.id.WeatherNowTemp);
         weatherNowFeelsLike = (TextView) root.findViewById(R.id.WeatherNowFeelsLike);
         weatherNowHumidity = (TextView) root.findViewById(R.id.WeatherNowHumidity);
-        weatherNowState = (TextView) root.findViewById(R.id.WeatherNowState);
         weatherNowDust = (TextView) root.findViewById(R.id.WeatherNowDust);
         weatherNowPM10 = (TextView) root.findViewById(R.id.WeatherNowPM10);
         weatherNowPM2_5 = (TextView) root.findViewById(R.id.WeatherNowPM2_5);
@@ -75,6 +73,8 @@ public class WeatherFragment extends Fragment {
                             .concat("@4x.png"))
                     .override(Target.SIZE_ORIGINAL)
                     .into(weatherNowIcon);
+
+            weatherNowIcon.setContentDescription(oneCallModel.current.weather.get(0).description);
 
             weatherNowTemp.setText(viewModel.kelvinToCelsius(oneCallModel.current.temp));
             weatherNowFeelsLike.setText("체감 "
@@ -103,17 +103,22 @@ public class WeatherFragment extends Fragment {
                         weatherHourlyTempGraph.invalidate();
             });
 
-            viewModel.getDust(city).observe(getViewLifecycleOwner(), dustModels -> {
-                viewModel.gradeToText(dustModels.item_all.pm10Grade.value).observe(getViewLifecycleOwner(), s -> {
-                    weatherNowDust.setText(s);
-                });
-                weatherNowPM10.setText(dustModels.item_all.pm10Value.value);
-                weatherNowPM2_5.setText(dustModels.item_all.pm25Value.value);
+            viewModel.getDust(city);
+        });
+
+        viewModel.dustData.observe(getViewLifecycleOwner(), dustModel -> {
+            viewModel.gradeToText(dustModel.item_all.pm10Grade.value).observe(getViewLifecycleOwner(), s -> {
+                weatherNowDust.setText(s);
             });
+
+            weatherNowPM10.setText(dustModel.item_all.pm10Value.value);
+            weatherNowPM2_5.setText(dustModel.item_all.pm25Value.value);
         });
     }
 
     private void initEvents() {
-
+        root.setOnClickListener(v -> {
+            viewModel.getWeather(37.476543, 127.048116);
+        });
     }
 }

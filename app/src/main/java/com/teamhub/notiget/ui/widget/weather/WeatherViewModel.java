@@ -24,19 +24,25 @@ public class WeatherViewModel extends ViewModel {
     private WeatherRepository weatherRepository;
     private DustRepository dustRepository;
     public MutableLiveData<OneCallModel> weatherData;
+    public MutableLiveData<DustModel> dustData;
 
     public WeatherViewModel() {
         weatherRepository = new WeatherRepository();
         dustRepository = new DustRepository();
         weatherData = new MutableLiveData<>();
+        dustData = new MutableLiveData<>();
     }
 
     public void getWeather(double lat, double lon) {
-        weatherData = weatherRepository.getWeather(lat, lon);
+        weatherRepository.getWeather(lat, lon).observeForever(oneCallModel -> {
+            weatherData.setValue(oneCallModel);
+        });
     }
 
-    public LiveData<DustModel> getDust(String city) {
-        return dustRepository.getDust(city.toLowerCase());
+    public void getDust(String city) {
+        dustRepository.getDust(city.toLowerCase()).observeForever(dustModel -> {
+            dustData.setValue(dustModel);
+        });
     }
 
     public LiveData<String> gradeToText(String grade) {
