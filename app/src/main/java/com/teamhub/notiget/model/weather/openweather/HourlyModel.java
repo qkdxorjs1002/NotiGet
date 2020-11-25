@@ -9,7 +9,7 @@ public class HourlyModel {
     public long dt;
     public double feels_like;
     public int humidity;
-    public int pop;
+    public double pop;
     public int pressure;
     public double temp;
     public int visibility;
