@@ -7,25 +7,48 @@
     android:layout_height="wrap_content"
     tools:context=".ui.widget.digitime.DigitimeFragment">
 
+    <rm.com.clocks.ClockImageView
+        android:id="@+id/clocks"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_centerInParent="true"
+        app:hours="16"
+        app:minutes="20"
+        app:timeSetDuration="400"
+        app:clockColor="#BBFFFFFF"
+        app:indeterminateSpeed="2"
+        app:pointerWidth="thin"
+        app:frameWidth="regular"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:id="@+id/digitime"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="00:00:"
-        android:textAppearance="@style/Font.Weather.Temp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="a 00:00:"
+        android:fontFamily="@font/labdigitime"
+        android:textSize="50dp"
+        android:letterSpacing="0.05"
+        android:textColor="#FF69B4"
+        android:layout_marginLeft="@dimen/widget_horizontal_gap"
+        app:layout_constraintLeft_toRightOf="@id/clocks"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/digitime2"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="top"
-        android:text="00 A"
-        android:textAppearance="@style/Font.Weather.Temp"
-        android:textSize="20dp"
+        android:layout_height="match_parent"
+        android:text="00"
+        android:fontFamily="@font/labdigitime"
+        android:textSize="30dp"
+        android:letterSpacing="0.05"
+        android:textColor="#FF69B4"
+        android:layout_marginLeft="5dp"
         app:layout_constraintLeft_toRightOf="@id/digitime"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/digitime"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
