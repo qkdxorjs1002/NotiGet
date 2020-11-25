@@ -63,6 +63,19 @@ public class WeatherFragment extends BaseFragment {
         weatherNowPM10 = (TextView) root.findViewById(R.id.WeatherNowPM10);
         weatherNowPM2_5 = (TextView) root.findViewById(R.id.WeatherNowPM2_5);
         weatherHourlyTempGraph = (LineChart) root.findViewById(R.id.WeatherHourlyTempGraph);
+
+        weatherHourlyTempGraph.setTouchEnabled(false);
+        weatherHourlyTempGraph.setDragEnabled(false);
+        weatherHourlyTempGraph.setScaleEnabled(false);
+        weatherHourlyTempGraph.setPinchZoom(false);
+        weatherHourlyTempGraph.setDrawGridBackground(false);
+        weatherHourlyTempGraph.setMaxHighlightDistance(300);
+        weatherHourlyTempGraph.getXAxis().setLabelCount(7);
+        weatherHourlyTempGraph.getXAxis().setAxisLineColor(Color.BLACK);
+        weatherHourlyTempGraph.getXAxis().setValueFormatter(new XAxisLabelFormatter());
+        weatherHourlyTempGraph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        weatherHourlyTempGraph.getAxisLeft().setEnabled(false);
+        weatherHourlyTempGraph.getAxisRight().setEnabled(false);
     }
 
     private void initObservers() {
@@ -84,26 +97,15 @@ public class WeatherFragment extends BaseFragment {
 
             String city = oneCallModel.timezone.split("/")[1];
 
+            weatherHourlyTempGraph.getDescription().setText(city);
+
+            viewModel.getDust(city);
+
             viewModel.makeHourlyChart(oneCallModel.hourly)
                     .observe(getViewLifecycleOwner(), lineData -> {
-                        weatherHourlyTempGraph.setTouchEnabled(false);
-                        weatherHourlyTempGraph.setDragEnabled(false);
-                        weatherHourlyTempGraph.setScaleEnabled(false);
-                        weatherHourlyTempGraph.setPinchZoom(false);
-                        weatherHourlyTempGraph.setDrawGridBackground(false);
-                        weatherHourlyTempGraph.setMaxHighlightDistance(300);
-                        weatherHourlyTempGraph.getXAxis().setLabelCount(7);
-                        weatherHourlyTempGraph.getXAxis().setAxisLineColor(Color.BLACK);
-                        weatherHourlyTempGraph.getXAxis().setValueFormatter(new XAxisLabelFormatter());
-                        weatherHourlyTempGraph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-                        weatherHourlyTempGraph.getAxisLeft().setEnabled(false);
-                        weatherHourlyTempGraph.getAxisRight().setEnabled(false);
-                        weatherHourlyTempGraph.getDescription().setText(city);
                         weatherHourlyTempGraph.setData(lineData);
                         weatherHourlyTempGraph.invalidate();
             });
-
-            viewModel.getDust(city);
         });
 
         viewModel.dustData.observe(getViewLifecycleOwner(), dustModel -> {

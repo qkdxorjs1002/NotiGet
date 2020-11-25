@@ -24,7 +24,6 @@ import com.teamhub.notiget.ui.widget.base.BaseFragment;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import rm.com.clocks.Clock;
 import rm.com.clocks.ClockDrawable;
 import rm.com.clocks.Stroke;
 

@@ -21,8 +21,8 @@ import java.util.List;
 
 public class WeatherViewModel extends ViewModel {
 
-    private WeatherRepository weatherRepository;
-    private DustRepository dustRepository;
+    private final WeatherRepository weatherRepository;
+    private final DustRepository dustRepository;
     public MutableLiveData<OneCallModel> weatherData;
     public MutableLiveData<DustModel> dustData;
 
