@@ -13,13 +13,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.teamhub.notiget.R;
+import com.teamhub.notiget.ui.widget.base.BaseFragment;
 
 import java.util.Calendar;
 
-public class DDayFragment extends Fragment {
+public class DDayFragment extends BaseFragment {
 
     private View root;
     private TextView dateTv;

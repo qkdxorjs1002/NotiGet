@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.teamhub.notiget.R;
+import com.teamhub.notiget.ui.widget.base.BaseFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,7 +28,7 @@ import rm.com.clocks.Clock;
 import rm.com.clocks.ClockDrawable;
 import rm.com.clocks.Stroke;
 
-public class DigitimeFragment extends Fragment {
+public class DigitimeFragment extends BaseFragment {
 
     private DigitimeViewModel viewModel;
     private View root;

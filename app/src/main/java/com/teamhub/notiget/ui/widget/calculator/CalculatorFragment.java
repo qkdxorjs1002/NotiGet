@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.teamhub.notiget.R;
+import com.teamhub.notiget.ui.widget.base.BaseFragment;
 
 
-public class CalculatorFragment extends Fragment {
+public class CalculatorFragment extends BaseFragment {
 
     private CalculatorViewModel viewModel;
     private View root;

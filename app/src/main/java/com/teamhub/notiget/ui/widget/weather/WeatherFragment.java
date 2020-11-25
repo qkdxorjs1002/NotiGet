@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
@@ -19,8 +18,9 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.adapter.XAxisLabelFormatter;
+import com.teamhub.notiget.ui.widget.base.BaseFragment;
 
-public class WeatherFragment extends Fragment {
+public class WeatherFragment extends BaseFragment {
 
     private WeatherViewModel viewModel;
     private View root;
