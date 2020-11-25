@@ -57,6 +57,13 @@ public class ScreenTimeFragment extends BaseFragment {
         viewModel = new ViewModelProvider(this).get(ScreenTimeViewModel.class);
         root = inflater.inflate(R.layout.widget_screentime, container, false);
 
+        return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        listView = root.findViewById(R.id.lv_screentime);
 
         ArrayList<ItemApplication> items = new ArrayList<>();//스크린 타임 표시를 위한 요소들 저장
         checkForPermission();//앱별 사용 시간 가져오기 위한 권한 체크
@@ -102,7 +109,6 @@ public class ScreenTimeFragment extends BaseFragment {
         ViewGroup.LayoutParams layoutParams = listView.getLayoutParams();
         layoutParams.height = (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 41, getResources().getDisplayMetrics()) * items.size());
         listView.setLayoutParams(layoutParams);
-        return root;
     }
 
     private void checkForPermission(){
@@ -140,5 +146,5 @@ public class ScreenTimeFragment extends BaseFragment {
         List<UsageStats> queryUsageStats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, cal.getTimeInMillis(), System.currentTimeMillis());
         return queryUsageStats;
     }
-    
+
 }

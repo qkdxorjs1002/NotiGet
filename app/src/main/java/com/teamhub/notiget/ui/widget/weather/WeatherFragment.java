@@ -49,9 +49,13 @@ public class WeatherFragment extends BaseFragment {
         initObservers();
         initEvents();
 
-        viewModel.getWeather(37.476543, 127.048116);
-
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.getWeather(37.476543, 127.048116);
     }
 
     private void initReferences() {
