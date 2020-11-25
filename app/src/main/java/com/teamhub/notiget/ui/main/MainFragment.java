@@ -47,13 +47,6 @@ public class MainFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        viewModel.commandMakeWidgetList();
-    }
-
     private void initReferences() {
         titleDate = (TextView) root.findViewById(R.id.TitleDate);
 
@@ -64,6 +57,8 @@ public class MainFragment extends Fragment {
         widgetListView.setHasFixedSize(true);
         widgetListView.setAdapter(widgetListAdapter);
         widgetListView.setLayoutManager(widgetListLayoutManager);
+
+        viewModel.commandMakeWidgetList();
     }
 
     private void initObservers() {
