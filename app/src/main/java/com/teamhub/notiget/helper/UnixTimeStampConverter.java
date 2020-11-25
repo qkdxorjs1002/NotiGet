@@ -1,4 +1,4 @@
-package com.teamhub.notiget.tool;
+package com.teamhub.notiget.helper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

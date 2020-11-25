@@ -1,4 +1,4 @@
-package com.teamhub.notiget.tool;
+package com.teamhub.notiget.helper;
 
 import android.content.Context;
 

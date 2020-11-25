@@ -17,7 +17,7 @@ import com.bumptech.glide.request.target.Target;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.teamhub.notiget.R;
-import com.teamhub.notiget.adapter.XAxisLabelFormatter;
+import com.teamhub.notiget.formatter.XAxisLabelFormatter;
 import com.teamhub.notiget.ui.widget.base.BaseFragment;
 
 public class WeatherFragment extends BaseFragment {

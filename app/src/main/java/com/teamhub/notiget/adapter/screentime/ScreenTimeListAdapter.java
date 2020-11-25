@@ -1,8 +1,7 @@
-package com.teamhub.notiget.adapter;
+package com.teamhub.notiget.adapter.screentime;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,12 @@ import com.teamhub.notiget.model.screentime.ItemApplication;
 
 import java.util.ArrayList;
 
-public class ApplicationListAdapter extends BaseAdapter {
+public class ScreenTimeListAdapter extends BaseAdapter {
     ArrayList<ItemApplication> items;
     Context context;
     PackageManager pm;
 
-    public ApplicationListAdapter(ArrayList<ItemApplication> items, Context context) {
+    public ScreenTimeListAdapter(ArrayList<ItemApplication> items, Context context) {
         this.items = items;//앱 리스트
         this.context = context;
         pm = context.getPackageManager();
@@ -45,7 +44,7 @@ public class ApplicationListAdapter extends BaseAdapter {
     public View getView(int i, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.item_application, parent, false);
+            convertView = inflater.inflate(R.layout.layout_screentime_list_item, parent, false);
         }
 
         TextView tv1, tv2;

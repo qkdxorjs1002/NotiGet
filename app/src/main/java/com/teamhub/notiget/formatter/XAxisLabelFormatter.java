@@ -1,8 +1,8 @@
-package com.teamhub.notiget.adapter;
+package com.teamhub.notiget.formatter;
 
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.teamhub.notiget.tool.UnixTimeStampConverter;
+import com.teamhub.notiget.helper.UnixTimeStampConverter;
 
 
 public class XAxisLabelFormatter extends ValueFormatter {

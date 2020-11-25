@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.teamhub.notiget.R;
-import com.teamhub.notiget.adapter.WidgetListAdapter;
+import com.teamhub.notiget.adapter.main.WidgetListAdapter;
 
 public class MainFragment extends Fragment {
 

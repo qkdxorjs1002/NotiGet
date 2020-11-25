@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.teamhub.notiget.adapter.DataLabelFormatter;
+import com.teamhub.notiget.formatter.DataLabelFormatter;
 import com.teamhub.notiget.model.weather.dust.DustModel;
 import com.teamhub.notiget.model.weather.openweather.HourlyModel;
 import com.teamhub.notiget.model.weather.openweather.OneCallModel;

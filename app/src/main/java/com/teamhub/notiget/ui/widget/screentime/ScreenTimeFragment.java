@@ -23,7 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.SettingScreenTimeActivity;
-import com.teamhub.notiget.adapter.ApplicationListAdapter;
+import com.teamhub.notiget.adapter.screentime.ScreenTimeListAdapter;
 import com.teamhub.notiget.model.main.Widget;
 import com.teamhub.notiget.model.screentime.ItemApplication;
 import com.teamhub.notiget.ui.widget.base.BaseFragment;
@@ -102,7 +102,7 @@ public class ScreenTimeFragment extends BaseFragment {
 
 
         //리스트뷰에 적용
-        ApplicationListAdapter adapter = new ApplicationListAdapter(items, getContext());
+        ScreenTimeListAdapter adapter = new ScreenTimeListAdapter(items, getContext());
         listView.setAdapter(adapter);
 
         //item 갯수 * item 하나당 height로 listview의 height를 지정해줌.

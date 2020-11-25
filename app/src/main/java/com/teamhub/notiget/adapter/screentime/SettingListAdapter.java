@@ -1,4 +1,4 @@
-package com.teamhub.notiget.adapter;
+package com.teamhub.notiget.adapter.screentime;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -20,13 +20,13 @@ import com.teamhub.notiget.model.screentime.ItemApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SetApplicationListAdapter extends BaseAdapter {
+public class SettingListAdapter extends BaseAdapter {
     List<ApplicationInfo> items;
     ArrayList<String> checkedApps;
     Context context;
     PackageManager pm;
 
-    public SetApplicationListAdapter(List<ApplicationInfo> items, ArrayList<String> checkedApps, Context context) {
+    public SettingListAdapter(List<ApplicationInfo> items, ArrayList<String> checkedApps, Context context) {
         this.items = items;//설치된 모든 앱들
         this.context = context;
         this.checkedApps = checkedApps;//체크된 앱들
@@ -53,7 +53,7 @@ public class SetApplicationListAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.item_set_application, parent, false);
+            convertView = inflater.inflate(R.layout.layout_screentime_list_item, parent, false);
         }
 
         TextView tv1, tv2;
@@ -64,6 +64,8 @@ public class SetApplicationListAdapter extends BaseAdapter {
         tv2 = convertView.findViewById(R.id.tv2);
         iv = convertView.findViewById(R.id.iv_appicon);
         checkBox = convertView.findViewById(R.id.check);
+
+        checkBox.setVisibility(View.VISIBLE);
 
         ApplicationInfo item = items.get(i);
 //            Log.d("asdf", i + " " + item.packageName + " " + checkedApps.size());

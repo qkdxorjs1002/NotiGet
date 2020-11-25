@@ -9,19 +9,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.teamhub.notiget.adapter.SetApplicationListAdapter;
+import com.teamhub.notiget.adapter.screentime.SettingListAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class SettingScreenTimeActivity extends AppCompatActivity {
-    SetApplicationListAdapter adapter;
+    SettingListAdapter adapter;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     PackageManager pm;
@@ -73,7 +72,7 @@ public class SettingScreenTimeActivity extends AppCompatActivity {
                     protected Object doInBackground(Object[] objects) {
                         if (search.equals("")) {
                             //검색 창에 아무것도 넣지 않았을 경우 모두 검색
-                            adapter = new SetApplicationListAdapter(intalledApps, checkedApps, getApplicationContext());
+                            adapter = new SettingListAdapter(intalledApps, checkedApps, getApplicationContext());
                         } else {
                             List<ApplicationInfo> apps = new ArrayList<>();//검색한 내용에 해당하는 앱 이름을 가진 앱들을 저장하기 위한 변수
                             for (ApplicationInfo app : intalledApps) {
@@ -86,7 +85,7 @@ public class SettingScreenTimeActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                             }
-                            adapter = new SetApplicationListAdapter(apps, checkedApps, getApplicationContext());
+                            adapter = new SettingListAdapter(apps, checkedApps, getApplicationContext());
                         }
                         return null;
                     }
@@ -111,7 +110,7 @@ public class SettingScreenTimeActivity extends AppCompatActivity {
         });
 
         //리스트뷰에 적용
-        adapter = new SetApplicationListAdapter(intalledApps, checkedApps, getApplicationContext());
+        adapter = new SettingListAdapter(intalledApps, checkedApps, getApplicationContext());
         ((ListView) findViewById(R.id.lv_applist)).setAdapter(adapter);
     }
 

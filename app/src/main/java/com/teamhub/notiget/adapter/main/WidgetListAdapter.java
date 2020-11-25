@@ -1,4 +1,4 @@
-package com.teamhub.notiget.adapter;
+package com.teamhub.notiget.adapter.main;
 
 import android.view.LayoutInflater;
 import android.view.View;
