@@ -12,7 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="00:00:"
-        android:textAppearance="@style/Font.Weather.Temp"
+        android:fontFamily="@font/labdigital"
+        android:textSize="35dp"
+        android:textColor="#FF69B4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,8 +25,9 @@
         android:layout_height="0dp"
         android:gravity="top"
         android:text="00 A"
-        android:textAppearance="@style/Font.Weather.Temp"
-        android:textSize="20dp"
+        android:fontFamily="@font/labdigital"
+        android:textSize="35dp"
+        android:textColor="#FF69B4"
         app:layout_constraintLeft_toRightOf="@id/digitime"
         app:layout_constraintBottom_toBottomOf="parent" />
 
