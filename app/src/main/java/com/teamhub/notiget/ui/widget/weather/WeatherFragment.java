@@ -63,7 +63,6 @@ public class WeatherFragment extends BaseWidgetFragment {
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.getWeather(37.476543, 127.048116);
         root.callOnClick();
     }
 
@@ -95,6 +94,14 @@ public class WeatherFragment extends BaseWidgetFragment {
         viewModel.location.observe(getViewLifecycleOwner(), location -> {
             viewModel.getWeather(location.getLatitude(), location.getLongitude());
         });
+
+        viewModel.address.observe(getViewLifecycleOwner(), address -> {
+            viewModel.getDescription(address).observe(getViewLifecycleOwner(), s -> {
+                weatherHourlyTempGraph.getDescription().setText(s);
+            });
+            viewModel.getDust(address);
+        });
+
         viewModel.weatherData.observe(getViewLifecycleOwner(), oneCallModel -> {
             Glide.with(root)
                     .load("https://openweathermap.org/img/wn/"
@@ -111,12 +118,6 @@ public class WeatherFragment extends BaseWidgetFragment {
             weatherNowHumidity.setText("습도 "
                     .concat(String.valueOf(oneCallModel.current.humidity).concat("%")));
 
-            String city = oneCallModel.timezone.split("/")[1];
-
-            weatherHourlyTempGraph.getDescription().setText(city);
-
-            viewModel.getDust(city);
-
             viewModel.makeHourlyChart(oneCallModel.hourly)
                     .observe(getViewLifecycleOwner(), lineData -> {
                         weatherHourlyTempGraph.setData(lineData);
@@ -125,12 +126,12 @@ public class WeatherFragment extends BaseWidgetFragment {
         });
 
         viewModel.dustData.observe(getViewLifecycleOwner(), dustModel -> {
-            viewModel.gradeToText(dustModel.item_all.pm10Grade.value).observe(getViewLifecycleOwner(), s -> {
+            viewModel.gradeToText(dustModel.pm10Value).observe(getViewLifecycleOwner(), s -> {
                 weatherNowDust.setText(s);
             });
 
-            weatherNowPM10.setText(dustModel.item_all.pm10Value.value);
-            weatherNowPM2_5.setText(dustModel.item_all.pm25Value.value);
+            weatherNowPM10.setText(String.valueOf(dustModel.pm10Value));
+            weatherNowPM2_5.setText(String.valueOf(dustModel.pm25Value));
         });
     }
 

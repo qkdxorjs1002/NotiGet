@@ -12,7 +12,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.teamhub.notiget.formatter.DataLabelFormatter;
-import com.teamhub.notiget.model.weather.dust.DustModel;
+import com.teamhub.notiget.model.weather.dust.DongModel;
+import com.teamhub.notiget.model.weather.dust.GuModel;
 import com.teamhub.notiget.model.weather.openweather.HourlyModel;
 import com.teamhub.notiget.model.weather.openweather.OneCallModel;
 import com.teamhub.notiget.repository.weather.dust.DustRepository;
@@ -20,6 +21,7 @@ import com.teamhub.notiget.repository.weather.openweather.WeatherRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class WeatherViewModel extends ViewModel {
 
@@ -28,7 +30,7 @@ public class WeatherViewModel extends ViewModel {
     public MutableLiveData<Location> location;
     public MutableLiveData<Address> address;
     public MutableLiveData<OneCallModel> weatherData;
-    public MutableLiveData<DustModel> dustData;
+    public MutableLiveData<DongModel> dustData;
 
     public WeatherViewModel() {
         weatherRepository = new WeatherRepository();
@@ -64,30 +66,62 @@ public class WeatherViewModel extends ViewModel {
         });
     }
 
-    public void getDust(String city) {
-        dustRepository.getDust(city.toLowerCase()).observeForever(dustModel -> {
-            dustData.setValue(dustModel);
+    public void getDust(Address address) {
+        dustRepository.getDust(address.getAdminArea()).observeForever(dustModel -> {
+            if (dustModel == null) {
+                return;
+            }
+
+            String addressGu;
+            String addressDong = address.getThoroughfare();
+            if (address.getSubLocality() != null) {
+                addressGu = address.getSubLocality();
+            } else {
+                addressGu = address.getLocality();
+            }
+
+            DongModel dongData = null;
+            for (GuModel gu : dustModel.list.guList) {
+                if (gu.gName.contains(addressGu)) {
+                    for (DongModel dong : gu.dongList) {
+                        dongData = dong;
+                        if (dongData.dName.contains(addressDong)) {
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            dustData.postValue(dongData);
         });
     }
 
-    public LiveData<String> gradeToText(String grade) {
+    public LiveData<String> getDescription(Address address) {
+        String addressGu;
+        String addressDong = address.getThoroughfare();
+        if (address.getSubLocality() != null) {
+            addressGu = address.getSubLocality();
+        } else {
+            addressGu = address.getLocality();
+        }
+
+        return new MutableLiveData<>(addressGu.concat(" ").concat(addressDong));
+    }
+
+    public LiveData<String> gradeToText(int pmValue) {
         MutableLiveData<String> gradeText = new MutableLiveData<>();
 
         String pmGradeText = "관측없음";
 
-        switch (grade) {
-            case "1":
-                pmGradeText = "좋음";
-                break;
-            case "2":
-                pmGradeText = "보통";
-                break;
-            case "3":
-                pmGradeText = "나쁨";
-                break;
-            case "4":
-                pmGradeText = "매우나쁨";
-                break;
+        if (pmValue > 150) {
+            pmGradeText = "매우나쁨";
+        } else if (pmValue > 80) {
+            pmGradeText = "나쁨";
+        } else if (pmValue > 30) {
+            pmGradeText = "보통";
+        } else if (pmValue >= 0) {
+            pmGradeText = "좋음";
         }
 
         gradeText.setValue(pmGradeText);

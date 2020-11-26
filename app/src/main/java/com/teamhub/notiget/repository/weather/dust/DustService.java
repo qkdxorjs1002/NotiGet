@@ -8,7 +8,7 @@ import retrofit2.http.Path;
 
 public interface DustService {
 
-    @GET("api/air_1hr_{city}.xml")
+    @GET("air/data/dataJSON/AIR_DONG_DATA_KIOT_{city}.json")
     Call<DustModel> getDust(@Path("city") String city);
     
 }
