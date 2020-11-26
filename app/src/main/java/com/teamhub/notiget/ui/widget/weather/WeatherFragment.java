@@ -18,9 +18,9 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.formatter.XAxisLabelFormatter;
-import com.teamhub.notiget.ui.widget.base.BaseFragment;
+import com.teamhub.notiget.ui.widget.base.BaseWidgetFragment;
 
-public class WeatherFragment extends BaseFragment {
+public class WeatherFragment extends BaseWidgetFragment {
 
     private WeatherViewModel viewModel;
     private View root;

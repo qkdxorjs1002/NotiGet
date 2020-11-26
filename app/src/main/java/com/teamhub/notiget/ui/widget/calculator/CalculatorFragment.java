@@ -13,10 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.teamhub.notiget.R;
-import com.teamhub.notiget.ui.widget.base.BaseFragment;
+import com.teamhub.notiget.ui.widget.base.BaseWidgetFragment;
 
 
-public class CalculatorFragment extends BaseFragment {
+public class CalculatorFragment extends BaseWidgetFragment {
 
     private CalculatorViewModel viewModel;
     private View root;

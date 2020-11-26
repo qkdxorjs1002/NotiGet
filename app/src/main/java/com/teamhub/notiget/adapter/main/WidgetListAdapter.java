@@ -1,6 +1,5 @@
 package com.teamhub.notiget.adapter.main;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.model.main.Widget;
-import com.teamhub.notiget.ui.widget.base.BaseFragment;
+import com.teamhub.notiget.ui.base.BaseFragment;
+import com.teamhub.notiget.ui.widget.base.BaseWidgetFragment;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,12 +26,12 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
 
     private List<Widget> widgetList;
 
-    private Map<String, BaseFragment> fragmentList;
+    private Map<String, BaseWidgetFragment> fragmentList;
 
-    private final Fragment parentFragment;
+    private final BaseFragment parentFragment;
     private OnItemClickListener onItemClickListener;
 
-    public WidgetListAdapter(Fragment fragment) {
+    public WidgetListAdapter(BaseFragment fragment) {
         parentFragment = fragment;
         onItemClickListener = null;
     }
@@ -48,7 +48,6 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TextView widgetTitle = (TextView) holder.view.findViewById(R.id.WidgetTitle);
-        ImageButton widgetSettingButton = (ImageButton) holder.view.findViewById(R.id.WidgetSettingButton);
 
         Widget widget = widgetList.get(position);
 
@@ -67,7 +66,7 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
 
         Widget widget = widgetList.get(holder.getAdapterPosition());
 
-        if (fragmentList.get("fragment_".concat(String.valueOf(holder.getAdapterPosition()))) == null) {
+        if (fragmentList.get(String.valueOf(holder.getAdapterPosition())) == null) {
 
             ConstraintLayout layout = (ConstraintLayout) holder.view.findViewById(R.id.WidgetFragmentContainer);
 
@@ -80,14 +79,15 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
 
             layout.addView(fragmentContainer);
 
-            BaseFragment fragment = widget.getFragment(holder.view);
+            BaseWidgetFragment fragment = widget.getFragment(holder.view);
+            fragment.setLiveMapData(parentFragment.getLiveMapData());
 
             parentFragment.getChildFragmentManager()
                     .beginTransaction()
                     .replace(fragmentContainer.getId(), fragment)
                     .commitNow();
 
-            fragmentList.put("fragment_".concat(String.valueOf(holder.getAdapterPosition())), fragment);
+            fragmentList.put(String.valueOf(holder.getAdapterPosition()), fragment);
         }
 
     }

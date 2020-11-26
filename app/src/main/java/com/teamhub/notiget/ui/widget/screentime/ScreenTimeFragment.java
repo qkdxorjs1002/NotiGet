@@ -24,10 +24,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.SettingScreenTimeActivity;
-import com.teamhub.notiget.adapter.screentime.ScreenTimeListAdapter;
-import com.teamhub.notiget.model.main.Widget;
+import com.teamhub.notiget.adapter.widget.screentime.ScreenTimeListAdapter;
 import com.teamhub.notiget.model.screentime.ItemApplication;
-import com.teamhub.notiget.ui.widget.base.BaseFragment;
+import com.teamhub.notiget.ui.widget.base.BaseWidgetFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,7 +36,7 @@ import java.util.List;
 import static android.app.AppOpsManager.OPSTR_GET_USAGE_STATS;
 import static androidx.core.app.AppOpsManagerCompat.MODE_ALLOWED;
 
-public class ScreenTimeFragment extends BaseFragment {
+public class ScreenTimeFragment extends BaseWidgetFragment {
 
     private ScreenTimeViewModel viewModel;
     private View root;

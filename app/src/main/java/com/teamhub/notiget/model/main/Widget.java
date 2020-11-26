@@ -2,7 +2,7 @@ package com.teamhub.notiget.model.main;
 
 import android.view.View;
 
-import com.teamhub.notiget.ui.widget.base.BaseFragment;
+import com.teamhub.notiget.ui.widget.base.BaseWidgetFragment;
 
 public class Widget {
 
@@ -15,10 +15,10 @@ public class Widget {
     }
 
     public interface CreateNewInstance {
-        BaseFragment create(View v);
+        BaseWidgetFragment create(View v);
     }
 
-    public BaseFragment getFragment(View v) {
+    public BaseWidgetFragment getFragment(View v) {
         return createNewInstance.create(v);
     }
 

@@ -1,14 +1,11 @@
 package com.teamhub.notiget.ui.main;
 
-import android.view.View;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.model.main.Widget;
-import com.teamhub.notiget.ui.widget.base.BaseFragment;
 import com.teamhub.notiget.ui.widget.calculator.CalculatorFragment;
 import com.teamhub.notiget.ui.widget.dday.DDayFragment;
 import com.teamhub.notiget.ui.widget.digitime.DigitimeFragment;

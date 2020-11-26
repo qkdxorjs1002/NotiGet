@@ -2,13 +2,11 @@ package com.teamhub.notiget.ui.widget.dday;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -17,11 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.teamhub.notiget.R;
-import com.teamhub.notiget.ui.widget.base.BaseFragment;
+import com.teamhub.notiget.ui.widget.base.BaseWidgetFragment;
 
 import java.util.Calendar;
 
-public class DDayFragment extends BaseFragment {
+public class DDayFragment extends BaseWidgetFragment {
 
     private View root;
     private TextView dateTv;

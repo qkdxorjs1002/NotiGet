@@ -1,4 +1,4 @@
-package com.teamhub.notiget.adapter.screentime;
+package com.teamhub.notiget.adapter.widget.screentime;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
