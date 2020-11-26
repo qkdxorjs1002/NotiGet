@@ -20,6 +20,7 @@
             android:padding="@dimen/widget_gap"
             android:src="@drawable/ic_settings"
             android:scaleType="fitXY"
+            android:alpha="0.5"
             android:background="@android:color/transparent"
             app:layout_constraintRight_toRightOf="parent"/>
 
