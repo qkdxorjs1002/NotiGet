@@ -1,6 +1,8 @@
 package com.teamhub.notiget.ui.widget.weather;
 
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import com.github.mikephil.charting.components.XAxis;
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.formatter.XAxisLabelFormatter;
 import com.teamhub.notiget.ui.widget.base.BaseWidgetFragment;
+
+import java.util.Map;
 
 public class WeatherFragment extends BaseWidgetFragment {
 
@@ -60,6 +64,7 @@ public class WeatherFragment extends BaseWidgetFragment {
     public void onResume() {
         super.onResume();
         viewModel.getWeather(37.476543, 127.048116);
+        root.callOnClick();
     }
 
     private void initReferences() {
@@ -87,6 +92,9 @@ public class WeatherFragment extends BaseWidgetFragment {
     }
 
     private void initObservers() {
+        viewModel.location.observe(getViewLifecycleOwner(), location -> {
+            viewModel.getWeather(location.getLatitude(), location.getLongitude());
+        });
         viewModel.weatherData.observe(getViewLifecycleOwner(), oneCallModel -> {
             Glide.with(root)
                     .load("https://openweathermap.org/img/wn/"
@@ -128,7 +136,7 @@ public class WeatherFragment extends BaseWidgetFragment {
 
     private void initEvents() {
         root.setOnClickListener(v -> {
-            viewModel.getWeather(37.476543, 127.048116);
+            viewModel.setLocationData(liveMapData);
         });
     }
 }

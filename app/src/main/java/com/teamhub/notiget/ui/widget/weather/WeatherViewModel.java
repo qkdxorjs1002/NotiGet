@@ -1,6 +1,8 @@
 package com.teamhub.notiget.ui.widget.weather;
 
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Location;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -23,14 +25,37 @@ public class WeatherViewModel extends ViewModel {
 
     private final WeatherRepository weatherRepository;
     private final DustRepository dustRepository;
+    public MutableLiveData<Location> location;
+    public MutableLiveData<Address> address;
     public MutableLiveData<OneCallModel> weatherData;
     public MutableLiveData<DustModel> dustData;
 
     public WeatherViewModel() {
         weatherRepository = new WeatherRepository();
         dustRepository = new DustRepository();
+        location = new MutableLiveData<>();
+        address = new MutableLiveData<>();
         weatherData = new MutableLiveData<>();
         dustData = new MutableLiveData<>();
+    }
+
+    public void setLocationData(MutableLiveData<Map<String, Object>> liveMapData) {
+        if (liveMapData != null) {
+            Map<String, ?> map = liveMapData.getValue();
+
+            if (map != null) {
+                Location gps = (Location) map.get("gpsLocation");
+                Location network = (Location) map.get("networkLocation");
+
+                if (gps != null) {
+                    location.postValue(gps);
+                    address.postValue((Address) map.get("gpsAddress"));
+                } else {
+                    location.postValue(network);
+                    address.postValue((Address) map.get("networkAddress"));
+                }
+            }
+        }
     }
 
     public void getWeather(double lat, double lon) {
