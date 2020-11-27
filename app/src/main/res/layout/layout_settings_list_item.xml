@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/widget_gap"
+    android:paddingStart="@dimen/widget_gap"
+    android:paddingEnd="@dimen/widget_gap">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="@dimen/widget_corner_radius"
+        app:cardElevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/WidgetTitleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/widget_title_background_color"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/WidgetTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/widget_vertical_gap"
+                android:paddingHorizontal="@dimen/widget_horizontal_gap"
+                android:text="@string/ui_widget_title_placeholder"
+                android:textAppearance="@style/Font.Title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/WidgetUpButton"/>
+
+            <ImageButton
+                android:id="@+id/WidgetUpButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingHorizontal="@dimen/widget_horizontal_gap"
+                android:src="@drawable/ic_drop_up"
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/WidgetTitle"
+                app:layout_constraintRight_toRightOf="@id/WidgetDownButton"/>
+
+            <ImageButton
+                android:id="@+id/WidgetDownButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingHorizontal="@dimen/widget_horizontal_gap"
+                android:src="@drawable/ic_drop_down"
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/WidgetUpButton"
+                app:layout_constraintRight_toLeftOf="@id/WidgetEnableSwitch"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/WidgetEnableSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingHorizontal="@dimen/widget_horizontal_gap"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/WidgetDownButton"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.gson.GsonBuilder;
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.model.main.Widget;
+import com.teamhub.notiget.model.settings.WidgetConfig;
+import com.teamhub.notiget.model.settings.WidgetState;
 import com.teamhub.notiget.ui.widget.calculator.CalculatorFragment;
 import com.teamhub.notiget.ui.widget.dday.DDayFragment;
 import com.teamhub.notiget.ui.widget.digitime.DigitimeFragment;
@@ -26,28 +29,68 @@ public class MainViewModel extends ViewModel {
         widgetList = new MutableLiveData<>();
     }
 
-    public void commandMakeWidgetList() {
+    public MutableLiveData<String> initWidgetConfig(String json) {
+        if (json.isEmpty()) {
+            WidgetConfig widgetConfig = new WidgetConfig();
+
+            widgetConfig.list.add(new WidgetState(
+                    "weather", true, R.string.ui_widget_weather));
+            widgetConfig.list.add(new WidgetState(
+                    "screentime", true, R.string.ui_widget_screentime));
+            widgetConfig.list.add(new WidgetState(
+                    "digitime", true, R.string.ui_widget_digitime));
+            widgetConfig.list.add(new WidgetState(
+                    "dday", true, R.string.ui_widget_dday));
+            widgetConfig.list.add(new WidgetState(
+                    "calculator", true, R.string.ui_widget_calculator));
+
+            return new MutableLiveData<>(new GsonBuilder().create().toJson(widgetConfig));
+        }
+
+        return new MutableLiveData<>(json);
+    }
+
+    public void makeWidgetList(String json) {
+        WidgetConfig widgetConfig = new GsonBuilder().create().fromJson(json, WidgetConfig.class);
+
         List<Widget> widgets = new ArrayList<>();
 
-        widgets.add(new Widget(
-                WeatherFragment::newInstance,
-                R.string.ui_widget_weather)
-        );
-        widgets.add(new Widget(
-                ScreenTimeFragment::newInstance,
-                R.string.ui_widget_screentime)
-        );
-        widgets.add(new Widget(
-                DigitimeFragment::newInstance,
-                R.string.ui_widget_digitime)
-        );
-        widgets.add(new Widget(DDayFragment::newInstance,
-                        R.string.ui_widget_dday)
-        );
-        widgets.add(new Widget(
-                CalculatorFragment::newInstance,
-                R.string.ui_widget_calculator)
-        );
+        for (WidgetState widgetState : widgetConfig.list) {
+            if (widgetState.enabled) {
+                switch (widgetState.name) {
+                    case "weather":
+                        widgets.add(new Widget(
+                                WeatherFragment::newInstance,
+                                widgetState.titleResourceId)
+                        );
+                        break;
+                    case "screentime":
+                        widgets.add(new Widget(
+                                ScreenTimeFragment::newInstance,
+                                widgetState.titleResourceId)
+                        );
+                        break;
+                    case "digitime":
+                        widgets.add(new Widget(
+                                DigitimeFragment::newInstance,
+                                widgetState.titleResourceId)
+                        );
+                        break;
+                    case "dday":
+                        widgets.add(new Widget(
+                                DDayFragment::newInstance,
+                                widgetState.titleResourceId)
+                        );
+                        break;
+                    case "calculator":
+                        widgets.add(new Widget(
+                                CalculatorFragment::newInstance,
+                                widgetState.titleResourceId)
+                        );
+                        break;
+                }
+            }
+        }
 
         this.widgetList.postValue(widgets);
     }

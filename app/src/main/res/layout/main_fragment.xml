@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
+            android:id="@+id/TopBarSettingButton"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="match_parent"
             android:padding="@dimen/widget_gap"

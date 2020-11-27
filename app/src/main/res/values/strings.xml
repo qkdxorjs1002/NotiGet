@@ -14,4 +14,5 @@
     <string name="ui_widget_weather_pm_title">미세먼지</string>
     <string name="ui_widget_weather_pm10">PM10</string>
     <string name="ui_widget_weather_pm2_5">PM2.5</string>
+    <string name="ui_settings_widget_priority">위젯 순서</string>
 </resources>

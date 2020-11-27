@@ -2,6 +2,7 @@ package com.teamhub.notiget.ui.main;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,10 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.teamhub.notiget.R;
+import com.teamhub.notiget.SettingsActivity;
 import com.teamhub.notiget.adapter.main.WidgetListAdapter;
+import com.teamhub.notiget.helper.PreferenceHelper;
 import com.teamhub.notiget.ui.base.BaseFragment;
 
 public class MainFragment extends BaseFragment {
@@ -23,6 +27,7 @@ public class MainFragment extends BaseFragment {
     private MainViewModel viewModel;
     private View root;
 
+    private ImageButton topBarSettingButton;
     private TextView titleDate;
 
     private RecyclerView widgetListView;
@@ -47,7 +52,19 @@ public class MainFragment extends BaseFragment {
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        String json = PreferenceHelper.getPreference(getContext(), "widgetConfig", "");
+        viewModel.initWidgetConfig(json).observe(getViewLifecycleOwner(), s -> {
+            viewModel.makeWidgetList(s);
+            PreferenceHelper.setPreference(getContext(), "widgetConfig", s);
+        });
+    }
+
     private void initReferences() {
+        topBarSettingButton = (ImageButton) root.findViewById(R.id.TopBarSettingButton);
         titleDate = (TextView) root.findViewById(R.id.TitleDate);
 
         widgetListView = (RecyclerView) root.findViewById(R.id.WidgetListView);
@@ -57,8 +74,6 @@ public class MainFragment extends BaseFragment {
         widgetListView.setHasFixedSize(true);
         widgetListView.setAdapter(widgetListAdapter);
         widgetListView.setLayoutManager(widgetListLayoutManager);
-
-        viewModel.commandMakeWidgetList();
     }
 
     private void initObservers() {
@@ -72,7 +87,9 @@ public class MainFragment extends BaseFragment {
     }
 
     private void initEvents() {
-
+        topBarSettingButton.setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), SettingsActivity.class));
+        });
     }
 
 }
