@@ -41,21 +41,17 @@ public class WeatherViewModel extends ViewModel {
         dustData = new MutableLiveData<>();
     }
 
-    public void setLocationData(MutableLiveData<Map<String, Object>> liveMapData) {
-        if (liveMapData != null) {
-            Map<String, ?> map = liveMapData.getValue();
+    public void setLocationData(Map<String, Object> map) {
+        if (map != null) {
+            Location gps = (Location) map.get("gpsLocation");
+            Location network = (Location) map.get("networkLocation");
 
-            if (map != null) {
-                Location gps = (Location) map.get("gpsLocation");
-                Location network = (Location) map.get("networkLocation");
-
-                if (gps != null) {
-                    location.postValue(gps);
-                    address.postValue((Address) map.get("gpsAddress"));
-                } else {
-                    location.postValue(network);
-                    address.postValue((Address) map.get("networkAddress"));
-                }
+            if (gps != null) {
+                location.postValue(gps);
+                address.postValue((Address) map.get("gpsAddress"));
+            } else if (network != null) {
+                location.postValue(network);
+                address.postValue((Address) map.get("networkAddress"));
             }
         }
     }

@@ -1,8 +1,6 @@
 package com.teamhub.notiget.ui.widget.weather;
 
 import android.graphics.Color;
-import android.location.Address;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +19,6 @@ import com.github.mikephil.charting.components.XAxis;
 import com.teamhub.notiget.R;
 import com.teamhub.notiget.formatter.XAxisLabelFormatter;
 import com.teamhub.notiget.ui.widget.base.BaseWidgetFragment;
-
-import java.util.Map;
 
 public class WeatherFragment extends BaseWidgetFragment {
 
@@ -60,12 +56,6 @@ public class WeatherFragment extends BaseWidgetFragment {
         return root;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        root.callOnClick();
-    }
-
     private void initReferences() {
         weatherNowIcon = (ImageView) root.findViewById(R.id.WeatherNowIcon);
         weatherNowTemp = (TextView) root.findViewById(R.id.WeatherNowTemp);
@@ -91,6 +81,10 @@ public class WeatherFragment extends BaseWidgetFragment {
     }
 
     private void initObservers() {
+        liveMapData.observe(getViewLifecycleOwner(), stringObjectMap -> {
+            viewModel.setLocationData(stringObjectMap);
+        });
+
         viewModel.location.observe(getViewLifecycleOwner(), location -> {
             viewModel.getWeather(location.getLatitude(), location.getLongitude());
         });
@@ -137,7 +131,7 @@ public class WeatherFragment extends BaseWidgetFragment {
 
     private void initEvents() {
         root.setOnClickListener(v -> {
-            viewModel.setLocationData(liveMapData);
+            viewModel.setLocationData(liveMapData.getValue());
         });
     }
 }
