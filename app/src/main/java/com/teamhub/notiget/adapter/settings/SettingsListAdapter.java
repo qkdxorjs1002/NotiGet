@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.gson.GsonBuilder;
 import com.teamhub.notiget.R;
+import com.teamhub.notiget.helper.PreferenceHelper;
 import com.teamhub.notiget.model.settings.WidgetConfig;
 import com.teamhub.notiget.model.settings.WidgetState;
 
