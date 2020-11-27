@@ -25,7 +25,7 @@ public class CalculatorFragment extends BaseWidgetFragment {
     private boolean isoperator = false ,Firstinput = true;
     double resultnum = 0, inputnum = 0;
     String operator = "＝", lastoperator = "＋";
-    private Button btn_back_space, btn_percent, btn_clear, btn_number_7,
+    private Button btn_back_space, btn_clear, btn_number_7,
             btn_number_8, btn_number_9, btn_division, btn_number_4, btn_number_5,
             btn_number_6,
             btn_multiplication, btn_number_1, btn_number_2, btn_number_3, btn_plus,
