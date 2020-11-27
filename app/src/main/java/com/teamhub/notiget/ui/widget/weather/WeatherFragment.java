@@ -85,6 +85,10 @@ public class WeatherFragment extends BaseWidgetFragment {
             viewModel.setLocationData(stringObjectMap);
         });
 
+        viewModel.highlightData.observe(getViewLifecycleOwner(), s -> {
+            liveHighlightData.postValue(s);
+        });
+
         viewModel.location.observe(getViewLifecycleOwner(), location -> {
             viewModel.getWeather(location.getLatitude(), location.getLongitude());
         });
@@ -104,7 +108,7 @@ public class WeatherFragment extends BaseWidgetFragment {
                     .override(Target.SIZE_ORIGINAL)
                     .into(weatherNowIcon);
 
-            weatherNowIcon.setContentDescription(oneCallModel.current.weather.get(0).description);
+            viewModel.setHighlight(oneCallModel);
 
             weatherNowTemp.setText(viewModel.kelvinToCelsius(oneCallModel.current.temp));
             weatherNowFeelsLike.setText("체감 "

@@ -31,6 +31,7 @@ public class WeatherViewModel extends ViewModel {
     public MutableLiveData<Address> address;
     public MutableLiveData<OneCallModel> weatherData;
     public MutableLiveData<DongModel> dustData;
+    public MutableLiveData<String> highlightData;
 
     public WeatherViewModel() {
         weatherRepository = new WeatherRepository();
@@ -39,6 +40,7 @@ public class WeatherViewModel extends ViewModel {
         address = new MutableLiveData<>();
         weatherData = new MutableLiveData<>();
         dustData = new MutableLiveData<>();
+        highlightData = new MutableLiveData<>();
     }
 
     public void setLocationData(Map<String, Object> map) {
@@ -56,9 +58,21 @@ public class WeatherViewModel extends ViewModel {
         }
     }
 
+    public void setHighlight(OneCallModel oneCallModel) {
+        String highlight = "오늘 기온은 최소 "
+                .concat(kelvinToCelsius(oneCallModel.daily.get(0).temp.min))
+                .concat(", 최대 ")
+                .concat(kelvinToCelsius(oneCallModel.daily.get(0).temp.max))
+                .concat("이며\n날씨는 ")
+                .concat(oneCallModel.daily.get(0).weather.get(0).description.replace("음", "은"))
+                .concat(" 입니다.");
+
+        highlightData.postValue(highlight);
+    }
+
     public void getWeather(double lat, double lon) {
         weatherRepository.getWeather(lat, lon).observeForever(oneCallModel -> {
-            weatherData.setValue(oneCallModel);
+            weatherData.postValue(oneCallModel);
         });
     }
 
@@ -120,7 +134,7 @@ public class WeatherViewModel extends ViewModel {
             pmGradeText = "좋음";
         }
 
-        gradeText.setValue(pmGradeText);
+        gradeText.postValue(pmGradeText);
 
         return gradeText;
     }
@@ -154,7 +168,7 @@ public class WeatherViewModel extends ViewModel {
         dataSet.setFillAlpha(50);
         dataSet.setDrawHorizontalHighlightIndicator(false);
 
-        lineData.setValue(new LineData(dataSet));
+        lineData.postValue(new LineData(dataSet));
 
         return lineData;
     }
