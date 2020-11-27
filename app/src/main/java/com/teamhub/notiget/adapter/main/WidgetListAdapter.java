@@ -69,6 +69,7 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
         if (fragmentList.get(String.valueOf(holder.getAdapterPosition())) == null) {
 
             ConstraintLayout layout = (ConstraintLayout) holder.view.findViewById(R.id.WidgetFragmentContainer);
+            layout.removeAllViews();
 
             LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             layoutParams.topToTop = R.id.WidgetFragmentContainer;
