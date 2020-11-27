@@ -64,6 +64,8 @@ public class MainFragment extends BaseFragment {
             viewModel.makeWidgetList(s);
             PreferenceHelper.setPreference(getContext(), "widgetConfig", s);
         });
+
+        titleHighlight.setText("");
     }
 
     private void initReferences() {

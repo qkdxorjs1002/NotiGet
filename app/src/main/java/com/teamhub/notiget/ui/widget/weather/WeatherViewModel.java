@@ -19,8 +19,11 @@ import com.teamhub.notiget.model.weather.openweather.OneCallModel;
 import com.teamhub.notiget.repository.weather.dust.DustRepository;
 import com.teamhub.notiget.repository.weather.openweather.WeatherRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class WeatherViewModel extends ViewModel {
@@ -59,12 +62,23 @@ public class WeatherViewModel extends ViewModel {
     }
 
     public void setHighlight(OneCallModel oneCallModel) {
-        String highlight = "오늘 기온은 최소 "
-                .concat(kelvinToCelsius(oneCallModel.daily.get(0).temp.min))
+        String highlight;
+        int index = 0;
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH", Locale.KOREA);
+        if (Integer.parseInt(simpleDateFormat.format(new Date(System.currentTimeMillis()))) < 17) {
+            highlight = "오늘 ";
+        } else {
+            highlight = "내일 ";
+            index = 1;
+        }
+
+        highlight += "기온은 최소 "
+                .concat(kelvinToCelsius(oneCallModel.daily.get(index).temp.min))
                 .concat(", 최대 ")
-                .concat(kelvinToCelsius(oneCallModel.daily.get(0).temp.max))
+                .concat(kelvinToCelsius(oneCallModel.daily.get(index).temp.max))
                 .concat("이며\n날씨는 ")
-                .concat(oneCallModel.daily.get(0).weather.get(0).description.replace("음", "은"))
+                .concat(oneCallModel.daily.get(index).weather.get(0).description)
                 .concat(" 입니다.");
 
         highlightData.postValue(highlight);
