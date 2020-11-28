@@ -9,6 +9,8 @@ public class BaseFragment extends Fragment {
 
     protected MutableLiveData<Map<String, Object>> liveMapData;
 
+    protected MutableLiveData<String> liveHighlightData;
+
     public void setLiveMapData(MutableLiveData<Map<String, Object>> liveMapData) {
         this.liveMapData = liveMapData;
     }
@@ -19,5 +21,17 @@ public class BaseFragment extends Fragment {
         }
 
         return liveMapData;
+    }
+
+    public void setLiveHighlightData(MutableLiveData<String> liveHighlightData) {
+        this.liveHighlightData = liveHighlightData;
+    }
+
+    public MutableLiveData<String> getLiveHighlightData() {
+        if (liveHighlightData == null) {
+            return null;
+        }
+
+        return liveHighlightData;
     }
 }
