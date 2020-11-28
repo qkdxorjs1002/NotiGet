@@ -13,11 +13,25 @@ public class BaseWidgetFragment extends BaseFragment {
 
     protected final View parentView;
 
+    protected MutableLiveData<String> liveHighlightData;
+
     public static BaseWidgetFragment newInstance(View v) {
         return new BaseWidgetFragment(v);
     }
 
     public BaseWidgetFragment(View v) {
         parentView = v;
+    }
+
+    public void setLiveHighlightData(MutableLiveData<String> liveHighlightData) {
+        this.liveHighlightData = liveHighlightData;
+    }
+
+    public MutableLiveData<String> getLiveHighlightData() {
+        if (liveHighlightData == null) {
+            return null;
+        }
+
+        return liveHighlightData;
     }
 }

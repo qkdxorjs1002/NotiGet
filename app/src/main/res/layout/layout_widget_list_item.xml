@@ -33,7 +33,6 @@
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/widget_vertical_gap"
                     android:paddingHorizontal="@dimen/widget_horizontal_gap"
-                    android:text="@string/ui_widget_title_placeholder"
                     android:textAppearance="@style/Font.Widget.Title"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
