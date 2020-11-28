@@ -1,15 +1,19 @@
 <resources>
     <string name="app_name">NotiGet</string>
+    <string name="ui_title_date_placeholder">11월 1일 일요일</string>
+    <string name="ui_title_highlight_placeholder">하이라이트</string>
+    <string name="ui_widget_title_placeholder">위젯 타이틀</string>
     <string name="ui_widget_weather">날씨</string>
     <string name="ui_widget_screentime">스크린 타임</string>
     <string name="ui_widget_digitime">시계</string>
     <string name="ui_widget_dday">디데이</string>
     <string name="ui_widget_contact">주소록</string>
     <string name="ui_widget_calculator">계산기</string>
+    <string name="ui_widget_weather_temp_placeholder">20°C</string>
+    <string name="ui_widget_weather_null_placeholder">   </string>
     <string name="ui_widget_weather_pm_title">미세먼지</string>
     <string name="ui_widget_weather_pm10">PM10</string>
     <string name="ui_widget_weather_pm2_5">PM2.5</string>
     <string name="ui_settings_widget_priority">위젯 순서</string>
     <string name="ui_permission_denied">위치 정보 제공에 거부하셨습니다.\n날씨 위젯 사용이 불가능합니다.</string>
-    <string name="ui_settings_title">설정</string>
 </resources>

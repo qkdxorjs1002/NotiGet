@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:paddingVertical="@dimen/widget_vertical_gap"
-        android:paddingHorizontal="@dimen/widget_horizontal_gap"
+        android:paddingHorizontal="24dp"
         android:gravity="center_vertical"
-        android:text="@string/ui_settings_title"
-        android:textAppearance="@style/Font.Title"
+        android:text="설정"
+        android:textAppearance="@style/Font.Settings.Title"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ScrollView
@@ -28,14 +28,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/widget_horizontal_gap"
-            android:layout_marginHorizontal="@dimen/widget_horizontal_gap">
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="@dimen/widget_horizontal_gap">
 
             <TextView
                 android:id="@+id/SettingsWidgetListViewTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/widget_vertical_gap"
-                android:paddingHorizontal="@dimen/widget_horizontal_gap"
+                android:layout_marginHorizontal="@dimen/widget_horizontal_gap"
                 android:text="@string/ui_settings_widget_priority"
                 android:textAppearance="@style/Font.MainList"
                 app:layout_constraintTop_toTopOf="parent"/>

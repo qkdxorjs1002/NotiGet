@@ -19,11 +19,8 @@ import com.teamhub.notiget.model.weather.openweather.OneCallModel;
 import com.teamhub.notiget.repository.weather.dust.DustRepository;
 import com.teamhub.notiget.repository.weather.openweather.WeatherRepository;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class WeatherViewModel extends ViewModel {
@@ -34,7 +31,6 @@ public class WeatherViewModel extends ViewModel {
     public MutableLiveData<Address> address;
     public MutableLiveData<OneCallModel> weatherData;
     public MutableLiveData<DongModel> dustData;
-    public MutableLiveData<String> highlightData;
 
     public WeatherViewModel() {
         weatherRepository = new WeatherRepository();
@@ -43,7 +39,6 @@ public class WeatherViewModel extends ViewModel {
         address = new MutableLiveData<>();
         weatherData = new MutableLiveData<>();
         dustData = new MutableLiveData<>();
-        highlightData = new MutableLiveData<>();
     }
 
     public void setLocationData(Map<String, Object> map) {
@@ -61,32 +56,9 @@ public class WeatherViewModel extends ViewModel {
         }
     }
 
-    public void setHighlight(OneCallModel oneCallModel) {
-        String highlight;
-        int index = 0;
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH", Locale.KOREA);
-        if (Integer.parseInt(simpleDateFormat.format(new Date(System.currentTimeMillis()))) < 17) {
-            highlight = "오늘 ";
-        } else {
-            highlight = "내일 ";
-            index = 1;
-        }
-
-        highlight += "기온은 최소 "
-                .concat(kelvinToCelsius(oneCallModel.daily.get(index).temp.min))
-                .concat(", 최대 ")
-                .concat(kelvinToCelsius(oneCallModel.daily.get(index).temp.max))
-                .concat("이며\n날씨는 ")
-                .concat(oneCallModel.daily.get(index).weather.get(0).description)
-                .concat(" 입니다.");
-
-        highlightData.postValue(highlight);
-    }
-
     public void getWeather(double lat, double lon) {
         weatherRepository.getWeather(lat, lon).observeForever(oneCallModel -> {
-            weatherData.postValue(oneCallModel);
+            weatherData.setValue(oneCallModel);
         });
     }
 
@@ -148,7 +120,7 @@ public class WeatherViewModel extends ViewModel {
             pmGradeText = "좋음";
         }
 
-        gradeText.postValue(pmGradeText);
+        gradeText.setValue(pmGradeText);
 
         return gradeText;
     }
@@ -182,7 +154,7 @@ public class WeatherViewModel extends ViewModel {
         dataSet.setFillAlpha(50);
         dataSet.setDrawHorizontalHighlightIndicator(false);
 
-        lineData.postValue(new LineData(dataSet));
+        lineData.setValue(new LineData(dataSet));
 
         return lineData;
     }

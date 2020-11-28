@@ -1,6 +1,5 @@
 package com.teamhub.notiget.ui.main;
 
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -30,7 +29,6 @@ public class MainFragment extends BaseFragment {
 
     private ImageButton topBarSettingButton;
     private TextView titleDate;
-    private TextView titleHighlight;
 
     private RecyclerView widgetListView;
     private WidgetListAdapter widgetListAdapter;
@@ -46,7 +44,6 @@ public class MainFragment extends BaseFragment {
                              @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         root = inflater.inflate(R.layout.main_fragment, container, false);
-        setLiveHighlightData(new MutableLiveData<>());
 
         initReferences();
         initObservers();
@@ -64,14 +61,11 @@ public class MainFragment extends BaseFragment {
             viewModel.makeWidgetList(s);
             PreferenceHelper.setPreference(getContext(), "widgetConfig", s);
         });
-
-        titleHighlight.setText("");
     }
 
     private void initReferences() {
         topBarSettingButton = (ImageButton) root.findViewById(R.id.TopBarSettingButton);
         titleDate = (TextView) root.findViewById(R.id.TitleDate);
-        titleHighlight = (TextView) root.findViewById(R.id.TitleHighlight);
 
         widgetListView = (RecyclerView) root.findViewById(R.id.WidgetListView);
         widgetListAdapter = new WidgetListAdapter(this);
@@ -83,10 +77,6 @@ public class MainFragment extends BaseFragment {
     }
 
     private void initObservers() {
-        liveHighlightData.observe(getViewLifecycleOwner(), s -> {
-            titleHighlight.setText(s);
-        });
-
         viewModel.currentDate().observe(getViewLifecycleOwner(), s -> {
             titleDate.setText(s);
         });

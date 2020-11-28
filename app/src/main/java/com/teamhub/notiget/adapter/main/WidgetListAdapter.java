@@ -82,9 +82,6 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
 
             BaseWidgetFragment fragment = widget.getFragment(holder.view);
             fragment.setLiveMapData(parentFragment.getLiveMapData());
-            if (holder.getAdapterPosition() == 0) {
-                fragment.setLiveHighlightData(parentFragment.getLiveHighlightData());
-            }
 
             parentFragment.getChildFragmentManager()
                     .beginTransaction()
