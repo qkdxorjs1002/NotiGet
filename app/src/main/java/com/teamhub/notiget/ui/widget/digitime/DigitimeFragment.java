@@ -54,7 +54,7 @@ public class DigitimeFragment extends BaseWidgetFragment {
                 .hours(Calendar.HOUR)
                 .minutes(Calendar.MINUTE)
                 .withSpeed(-2.5F)
-                .withColor(Color.WHITE)
+                .withColor(Color.BLACK)
                 .withFrameWidth(Stroke.REGULAR)
                 .withPointerWidth(Stroke.THIN)
                 .withDuration(600L)
