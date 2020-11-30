@@ -65,6 +65,7 @@ public class WidgetListAdapter extends RecyclerView.Adapter<WidgetListAdapter.Vi
         super.onViewAttachedToWindow(holder);
 
         Widget widget = widgetList.get(holder.getAdapterPosition());
+        holder.view.findViewById(R.id.WidgetSettingButton).setVisibility(View.GONE);
 
         if (fragmentList.get(String.valueOf(holder.getAdapterPosition())) == null) {
 
