@@ -86,6 +86,10 @@ public class WeatherFragment extends BaseWidgetFragment {
         });
 
         viewModel.highlightData.observe(getViewLifecycleOwner(), s -> {
+            if (liveHighlightData == null) {
+                return;
+            }
+
             liveHighlightData.postValue(s);
         });
 
